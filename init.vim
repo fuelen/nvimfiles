@@ -14,6 +14,8 @@ NeoBundle 'Yggdroot/indentLine'        " prints vertical lines at each indentati
 NeoBundle 'Raimondi/delimitMate'       " automatic closing of quotes
 NeoBundle 'Valloric/MatchTagAlways'    " highlight XML/HTML tags that enclose your cursor location
 NeoBundle 'gorodinskiy/vim-coloresque' " highlight colors in css files
+NeoBundle 'mxw/vim-jsx'
+" NeoBundle 'elzr/vim-json'
 
 " Git
 NeoBundle 'tpope/vim-fugitive'
@@ -64,7 +66,7 @@ let g:airline_powerline_fonts=1
 
 " Neovim-qt Guifont command
 command! -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>") | let g:Guifont="<args>"
-Guifont Terminus
+Guifont Terminus:h12
 
 " use git against backup files
 set nobackup
@@ -164,5 +166,17 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" add tags highlighting to js
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'javascript' : 1,
+    \}
+
+" for json quotes
+let g:indentLine_concealcursor=""
 
 cd ~/rails_projects " set default working directory
