@@ -13,8 +13,9 @@ NeoBundle 'mhartington/oceanic-next'   " colorscheme
 NeoBundle 'Yggdroot/indentLine'        " prints vertical lines at each indentation level
 NeoBundle 'Raimondi/delimitMate'       " automatic closing of quotes
 NeoBundle 'Valloric/MatchTagAlways'    " highlight XML/HTML tags that enclose your cursor location
-NeoBundle 'gorodinskiy/vim-coloresque' " highlight colors in css files
+NeoBundle 'lilydjwg/colorizer'         " highlight colors in css files
 NeoBundle 'mxw/vim-jsx'
+NeoBundle 'elixir-lang/vim-elixir'
 " NeoBundle 'elzr/vim-json'
 
 " Git
@@ -179,4 +180,4 @@ let g:mta_filetypes = {
 " for json quotes
 let g:indentLine_concealcursor=""
 
-cd ~/rails_projects " set default working directory
+cd ~/projects " set default working directory
