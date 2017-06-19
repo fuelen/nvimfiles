@@ -9,13 +9,16 @@ call neobundle#begin(expand('/home/fuelen/.config/nvim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " colorscheme & syntax highlighting
-NeoBundle 'mhartington/oceanic-next'   " colorscheme
+NeoBundle 'KeitaNakamura/neodark.vim'
 NeoBundle 'Yggdroot/indentLine'        " prints vertical lines at each indentation level
 NeoBundle 'Raimondi/delimitMate'       " automatic closing of quotes
 NeoBundle 'Valloric/MatchTagAlways'    " highlight XML/HTML tags that enclose your cursor location
 NeoBundle 'lilydjwg/colorizer'         " highlight colors in css files
 NeoBundle 'mxw/vim-jsx'
 NeoBundle 'elixir-lang/vim-elixir'
+NeoBundle 'slashmili/alchemist.vim'
+NeoBundle 'slim-template/vim-slim'
+NeoBundle 'terryma/vim-multiple-cursors'
 " NeoBundle 'elzr/vim-json'
 
 " Git
@@ -56,19 +59,12 @@ NeoBundleCheck
 "End NeoBundle Scripts-------------------------
 
 "------------------Settings--------------------
-let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
 
 syntax enable
 
-colorscheme OceanicNext
-set background=dark
-let g:airline_theme='oceanicnext'
+colorscheme neodark
+let g:airline_theme='neodark'
 let g:airline_powerline_fonts=1
-
-" Neovim-qt Guifont command
-command! -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>") | let g:Guifont="<args>"
-Guifont Terminus:h12
-
 " use git against backup files
 set nobackup
 set nowritebackup
@@ -90,7 +86,7 @@ set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 set splitbelow splitright " where new split must be created
 set hidden " allow hidden buffers
 set colorcolumn=110 " width like on github
-" set cursorline " highlight whole line under cursor, but makes vim very slow
+set cursorline " highlight whole line under cursor, but makes vim very slow
 
 set undofile " undo changes between sessions
 
@@ -179,5 +175,4 @@ let g:mta_filetypes = {
 
 " for json quotes
 let g:indentLine_concealcursor=""
-
-cd ~/projects " set default working directory
+" cd ~/projects " set default working directory
