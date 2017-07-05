@@ -19,6 +19,9 @@ NeoBundle 'elixir-lang/vim-elixir'
 NeoBundle 'slashmili/alchemist.vim'
 NeoBundle 'slim-template/vim-slim'
 NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'joker1007/vim-ruby-heredoc-syntax'
+NeoBundle 'kchmck/vim-coffee-script' " I don't need coffee, but plugin above needs this
+" NeoBundle 'ryanoasis/vim-devicons'
 " NeoBundle 'elzr/vim-json'
 
 " Git
@@ -30,14 +33,13 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Xuyuanp/nerdtree-git-plugin'
 
 " Utils
-NeoBundle 'benekastah/neomake'     " plugin for asynchronous :make using (NeoVim)
 NeoBundle 'bling/vim-airline'      " status-bar
 NeoBundle 'tpope/vim-surround'     " for manipulation with quotes :)
 NeoBundle 'tomtom/tcomment_vim'    " commenter
 NeoBundle 'AndrewRadev/switch.vim' " useful switcher
 NeoBundle 'Chiel92/vim-autoformat' " + install ruby-beautify gem
 NeoBundle 'dkprice/vim-easygrep'   " Fast and Easy Find and Replace Across Multiple Files
-NeoBundle 'scrooloose/syntastic'   " Syntax checker
+NeoBundle 'w0rp/ale'               " Syntax checker
 NeoBundle 'ngmy/vim-rubocop'       " code-style checker for ruby
 NeoBundle 'Shougo/deoplete.nvim'   " autocompletion plugin (NeoVim)
 NeoBundle 'Shougo/neco-vim'        "  search in source for deoplete
@@ -82,6 +84,10 @@ set nowrap " disable wrapping strings (when they very long)
 " show spaces and tabs
 set list
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+
+" autocmd FileType nerdtree setlocal nolist
+" let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+" let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
 
 set splitbelow splitright " where new split must be created
 set hidden " allow hidden buffers
@@ -175,4 +181,4 @@ let g:mta_filetypes = {
 
 " for json quotes
 let g:indentLine_concealcursor=""
-" cd ~/projects " set default working directory
+cd ~/projects " set default working directory
