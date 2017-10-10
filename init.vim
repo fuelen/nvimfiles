@@ -20,7 +20,8 @@ NeoBundle 'slashmili/alchemist.vim'
 NeoBundle 'slim-template/vim-slim'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'joker1007/vim-ruby-heredoc-syntax'
-NeoBundle 'kchmck/vim-coffee-script' " I don't need coffee, but plugin above needs this
+NeoBundle 'kchmck/vim-coffee-script'    " I don't need coffee, but plugin above needs this
+" NeoBundle 'rhysd/vim-grammarous'        " Grammar checker based on LanguageTool
 " NeoBundle 'ryanoasis/vim-devicons'
 " NeoBundle 'elzr/vim-json'
 
@@ -48,6 +49,8 @@ NeoBundle 'Shougo/neco-syntax'     " search in syntax for deoplete
 NeoBundle 'tpope/vim-endwise'      " autocomplete ruby blocks
 NeoBundle 'junegunn/fzf'           " fuzzy finder
 NeoBundle 'ashisha/image.vim'      " view images as ASCII
+NeoBundle 'haya14busa/vim-open-googletranslate'
+NeoBundle 'tyru/open-browser.vim'  " dependency for vim-open-googletranslate
 
 " Required:
 call neobundle#end()
@@ -133,9 +136,17 @@ inoremap <right> <nop>
 imap jj <ESC>
 " move between splits by tab
 nnoremap <Tab> <C-w>w
+
+" navigate between splits
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 " turn search highlight off
 nnoremap <leader><space> :noh<cr>
 
+map <leader>s :Grep 
 " open file browser
 map <leader>p :NERDTreeToggle<cr>
 " set cursor in file browser on current file
@@ -144,6 +155,9 @@ map <C-f> :NERDTreeFind<cr>
 " Easy commenting
 nnoremap // :TComment<CR>
 vnoremap // :TComment<CR>
+
+" open selected text in browser
+vnoremap <leader>T :OpenGoogleTranslate<CR>
 
 " navigate through autocomplete menu (Deoplete)
 inoremap <C-k> <C-Up>
@@ -155,6 +169,8 @@ let g:switch_mapping = "-"
 " no comment :)
 noremap === :Autoformat<CR>
 
+" setup preview window for fuzzy finder
+let $FZF_DEFAULT_OPTS='--preview "[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (highlight -O ansi -l {} || coderay {} || rougify {} || cat {}) 2> /dev/null | head -500"'
 " shortkey for fuzzy finder
 nnoremap z :FZF<CR>
 
@@ -178,6 +194,33 @@ let g:mta_filetypes = {
     \ 'jinja' : 1,
     \ 'javascript' : 1,
     \}
+
+let $TERM='xterm'
+
+let g:EasyGrepMode=0 " all files
+let g:EasyGrepCommand=1 " grep instead of vimgrep
+let g:EasyGrepRecursive=1
+let g:EasyGrepSearchCurrentBufferDir=1
+let g:EasyGrepIgnoreCase=1
+let g:EasyGrepHidden=0
+let g:EasyGrepBinary=0
+let g:EasyGrepFilesToInclude=''
+let g:EasyGrepFilesToExclude='*.swp,*~,*.beam,*.log,_build/,node_modules'
+let g:EasyGrepAllOptionsInExplorer=1
+let g:EasyGrepWindow=0
+let g:EasyGrepReplaceWindowMode=0
+let g:EasyGrepOpenWindowOnMatch=1
+let g:EasyGrepEveryMatch=0
+let g:EasyGrepJumpToMatch=1
+let g:EasyGrepInvertWholeWord=0
+let g:EasyGrepPatternType='regex'
+let g:EasyGrepFileAssociationsInExplorer=0
+let g:EasyGrepExtraWarnings=0
+let g:EasyGrepOptionPrefix='<leader>vy'
+let g:EasyGrepReplaceAllPerFile=0 
+
+" use system languagetool instead of downloading new
+" let g:grammarous#languagetool_cmd = 'languagetool'
 
 " for json quotes
 let g:indentLine_concealcursor=""
