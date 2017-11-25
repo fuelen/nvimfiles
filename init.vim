@@ -52,6 +52,8 @@ NeoBundle 'ashisha/image.vim'      " view images as ASCII
 NeoBundle 'haya14busa/vim-open-googletranslate'
 NeoBundle 'tyru/open-browser.vim'  " dependency for vim-open-googletranslate
 
+NeoBundle 'mhinz/vim-startify' " Startup window
+
 " Required:
 call neobundle#end()
 
@@ -157,7 +159,7 @@ nnoremap // :TComment<CR>
 vnoremap // :TComment<CR>
 
 " open selected text in browser
-vnoremap <leader>T :OpenGoogleTranslate<CR>
+vnoremap <leader>t :OpenGoogleTranslate<CR>
 
 " navigate through autocomplete menu (Deoplete)
 inoremap <C-k> <C-Up>
@@ -205,7 +207,7 @@ let g:EasyGrepIgnoreCase=1
 let g:EasyGrepHidden=0
 let g:EasyGrepBinary=0
 let g:EasyGrepFilesToInclude=''
-let g:EasyGrepFilesToExclude='*.swp,*~,*.beam,*.log,_build/,node_modules'
+let g:EasyGrepFilesToExclude='*.swp,*~,*.beam,*.log,_build/,node_modules,erl_crash.dump'
 let g:EasyGrepAllOptionsInExplorer=1
 let g:EasyGrepWindow=0
 let g:EasyGrepReplaceWindowMode=0
@@ -224,4 +226,7 @@ let g:EasyGrepReplaceAllPerFile=0
 
 " for json quotes
 let g:indentLine_concealcursor=""
-cd ~/projects " set default working directory
+
+" set default working directory, don't enable if you want to
+" use alchemist.vim
+" cd ~/projects
