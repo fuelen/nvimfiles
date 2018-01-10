@@ -16,11 +16,13 @@ NeoBundle 'Valloric/MatchTagAlways'    " highlight XML/HTML tags that enclose yo
 NeoBundle 'lilydjwg/colorizer'         " highlight colors in css files
 NeoBundle 'mxw/vim-jsx'
 NeoBundle 'elixir-lang/vim-elixir'
-NeoBundle 'slashmili/alchemist.vim'
+" NeoBundle 'slashmili/alchemist.vim'
 NeoBundle 'slim-template/vim-slim'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'joker1007/vim-ruby-heredoc-syntax'
 NeoBundle 'kchmck/vim-coffee-script'    " I don't need coffee, but plugin above needs this
+NeoBundle 'direnv/direnv.vim'
+" NeoBundle 'ternjs/tern_for_vim', { 'build': { 'unix': 'npm install tern' }}
 " NeoBundle 'rhysd/vim-grammarous'        " Grammar checker based on LanguageTool
 " NeoBundle 'ryanoasis/vim-devicons'
 " NeoBundle 'elzr/vim-json'
@@ -180,13 +182,13 @@ nnoremap z :FZF<CR>
 let g:vimrubocop_config = '~/.config/nvim/rubocop.yml'
 
 " Settings for syntastic (from readme)
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
 " add tags highlighting to js
 let g:mta_filetypes = {
@@ -207,7 +209,7 @@ let g:EasyGrepIgnoreCase=1
 let g:EasyGrepHidden=0
 let g:EasyGrepBinary=0
 let g:EasyGrepFilesToInclude=''
-let g:EasyGrepFilesToExclude='*.swp,*~,*.beam,*.log,_build/,node_modules,erl_crash.dump'
+let g:EasyGrepFilesToExclude='*.swp,*~,*.beam,*.log,_build/,node_modules,erl_crash.dump,tmp/'
 let g:EasyGrepAllOptionsInExplorer=1
 let g:EasyGrepWindow=0
 let g:EasyGrepReplaceWindowMode=0
@@ -229,4 +231,4 @@ let g:indentLine_concealcursor=""
 
 " set default working directory, don't enable if you want to
 " use alchemist.vim
-" cd ~/projects
+cd ~/projects
