@@ -14,14 +14,16 @@ NeoBundle 'Yggdroot/indentLine'        " prints vertical lines at each indentati
 NeoBundle 'Raimondi/delimitMate'       " automatic closing of quotes
 NeoBundle 'Valloric/MatchTagAlways'    " highlight XML/HTML tags that enclose your cursor location
 NeoBundle 'lilydjwg/colorizer'         " highlight colors in css files
-NeoBundle 'mxw/vim-jsx'
+NeoBundle 'chemzqm/vim-jsx-improve'
 NeoBundle 'elixir-lang/vim-elixir'
-" NeoBundle 'slashmili/alchemist.vim'
+NeoBundle 'slashmili/alchemist.vim'
 NeoBundle 'slim-template/vim-slim'
 NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'joker1007/vim-ruby-heredoc-syntax'
 NeoBundle 'kchmck/vim-coffee-script'    " I don't need coffee, but plugin above needs this
 NeoBundle 'direnv/direnv.vim'
+NeoBundle 'janko-m/vim-test'
+NeoBundle 'bkad/CamelCaseMotion'
 " NeoBundle 'ternjs/tern_for_vim', { 'build': { 'unix': 'npm install tern' }}
 " NeoBundle 'rhysd/vim-grammarous'        " Grammar checker based on LanguageTool
 " NeoBundle 'ryanoasis/vim-devicons'
@@ -42,7 +44,7 @@ NeoBundle 'tomtom/tcomment_vim'    " commenter
 NeoBundle 'AndrewRadev/switch.vim' " useful switcher
 NeoBundle 'Chiel92/vim-autoformat' " + install ruby-beautify gem
 NeoBundle 'dkprice/vim-easygrep'   " Fast and Easy Find and Replace Across Multiple Files
-NeoBundle 'w0rp/ale'               " Syntax checker
+" NeoBundle 'w0rp/ale'               " Syntax checker
 NeoBundle 'ngmy/vim-rubocop'       " code-style checker for ruby
 NeoBundle 'Shougo/deoplete.nvim'   " autocompletion plugin (NeoVim)
 NeoBundle 'Shougo/neco-vim'        "  search in source for deoplete
@@ -53,6 +55,8 @@ NeoBundle 'junegunn/fzf'           " fuzzy finder
 NeoBundle 'ashisha/image.vim'      " view images as ASCII
 NeoBundle 'haya14busa/vim-open-googletranslate'
 NeoBundle 'tyru/open-browser.vim'  " dependency for vim-open-googletranslate
+NeoBundle 'chrisbra/csv.vim'       " csv editor and viewer
+NeoBundle 'neovimhaskell/haskell-vim'
 
 NeoBundle 'mhinz/vim-startify' " Startup window
 
@@ -167,6 +171,16 @@ vnoremap <leader>t :OpenGoogleTranslate<CR>
 inoremap <C-k> <C-Up>
 inoremap <C-j> <C-Down>
 
+" CamelCaseMotion
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
+sunmap ge
+
 " switch on -
 let g:switch_mapping = "-"
 
@@ -181,23 +195,14 @@ nnoremap z :FZF<CR>
 " set custom config file for RuboCop
 let g:vimrubocop_config = '~/.config/nvim/rubocop.yml'
 
-" Settings for syntastic (from readme)
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-"
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-
 " add tags highlighting to js
 let g:mta_filetypes = {
-    \ 'html' : 1,
-    \ 'xhtml' : 1,
-    \ 'xml' : 1,
-    \ 'jinja' : 1,
-    \ 'javascript' : 1,
-    \}
+      \ 'html' : 1,
+      \ 'xhtml' : 1,
+      \ 'xml' : 1,
+      \ 'jinja' : 1,
+      \ 'javascript' : 1,
+      \}
 
 let $TERM='xterm'
 
@@ -209,7 +214,7 @@ let g:EasyGrepIgnoreCase=1
 let g:EasyGrepHidden=0
 let g:EasyGrepBinary=0
 let g:EasyGrepFilesToInclude=''
-let g:EasyGrepFilesToExclude='*.swp,*~,*.beam,*.log,_build/,node_modules,erl_crash.dump,tmp/'
+let g:EasyGrepFilesToExclude='*.swp,*~,*.beam,*webpack_bundle.js,*.worker.js,*.log,_build/,node_modules,erl_crash.dump,*.sql,coverage/,tmp/,.docker/'
 let g:EasyGrepAllOptionsInExplorer=1
 let g:EasyGrepWindow=0
 let g:EasyGrepReplaceWindowMode=0
@@ -221,7 +226,7 @@ let g:EasyGrepPatternType='regex'
 let g:EasyGrepFileAssociationsInExplorer=0
 let g:EasyGrepExtraWarnings=0
 let g:EasyGrepOptionPrefix='<leader>vy'
-let g:EasyGrepReplaceAllPerFile=0 
+let g:EasyGrepReplaceAllPerFile=0
 
 " use system languagetool instead of downloading new
 " let g:grammarous#languagetool_cmd = 'languagetool'
@@ -231,4 +236,25 @@ let g:indentLine_concealcursor=""
 
 " set default working directory, don't enable if you want to
 " use alchemist.vim
-cd ~/projects
+" cd ~/projects
+
+" https://github.com/phoenixframework/phoenix/issues/1165
+" Settings for Ale
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_sign_column_always = 1
+" let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+" let g:ale_javascript_eslint_executable = 'eslint_d'
+" let g:ale_sign_error = '✗'
+" let g:ale_sign_warning = '⚠'
+"
+" augroup AleGroup
+"   autocmd!
+"   autocmd User ALELint call TouchOpenFile()
+" augroup END
+"
+" func! TouchOpenFile()
+"   let g:ale_enabled = 0
+"   sleep 500m
+"   w
+"   let g:ale_enabled = 1
+" endfunc
