@@ -52,7 +52,6 @@ NeoBundle 'Shougo/neoinclude.vim'  " search in included files for deoplete
 NeoBundle 'Shougo/neco-syntax'     " search in syntax for deoplete
 NeoBundle 'tpope/vim-endwise'      " autocomplete ruby blocks
 NeoBundle 'junegunn/fzf'           " fuzzy finder
-NeoBundle 'ashisha/image.vim'      " view images as ASCII
 NeoBundle 'haya14busa/vim-open-googletranslate'
 NeoBundle 'tyru/open-browser.vim'  " dependency for vim-open-googletranslate
 NeoBundle 'chrisbra/csv.vim'       " csv editor and viewer
