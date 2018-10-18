@@ -1,4 +1,4 @@
-# NeoVim files for Ruby/Rails developer
+# NeoVim files
 
 ## Install on Arch linux
 ### packages
@@ -6,10 +6,6 @@
 * neovim-qt-git (AUR)
 * python-neovim
 * python2-neovim
-
-### gems
-* ruby-beautify
-* rubocop
 
 Clone this repository into
 ~/.config/nvim
