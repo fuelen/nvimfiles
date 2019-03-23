@@ -15,7 +15,7 @@ NeoBundle 'Raimondi/delimitMate'       " automatic closing of quotes
 NeoBundle 'Valloric/MatchTagAlways'    " highlight XML/HTML tags that enclose your cursor location
 NeoBundle 'lilydjwg/colorizer'         " highlight colors in css files
 NeoBundle 'chemzqm/vim-jsx-improve'
-NeoBundle 'elixir-lang/vim-elixir'
+NeoBundle 'elixir-editors/vim-elixir'
 NeoBundle 'slashmili/alchemist.vim'
 NeoBundle 'slim-template/vim-slim'
 NeoBundle 'terryma/vim-multiple-cursors'
@@ -24,8 +24,9 @@ NeoBundle 'kchmck/vim-coffee-script'    " I don't need coffee, but plugin above 
 NeoBundle 'direnv/direnv.vim'
 NeoBundle 'janko-m/vim-test'
 NeoBundle 'bkad/CamelCaseMotion'
+NeoBundle 'slime-lang/vim-slime-syntax.git' " remove this shit later
 " NeoBundle 'ternjs/tern_for_vim', { 'build': { 'unix': 'npm install tern' }}
-" NeoBundle 'rhysd/vim-grammarous'        " Grammar checker based on LanguageTool
+NeoBundle 'rhysd/vim-grammarous'        " Grammar checker based on LanguageTool
 " NeoBundle 'ryanoasis/vim-devicons'
 " NeoBundle 'elzr/vim-json'
 
@@ -56,6 +57,8 @@ NeoBundle 'haya14busa/vim-open-googletranslate'
 NeoBundle 'tyru/open-browser.vim'  " dependency for vim-open-googletranslate
 NeoBundle 'chrisbra/csv.vim'       " csv editor and viewer
 NeoBundle 'neovimhaskell/haskell-vim'
+NeoBundle 'elmcast/elm-vim'
+NeoBundle 'reasonml-editor/vim-reason-plus'
 
 NeoBundle 'mhinz/vim-startify' " Startup window
 
@@ -89,7 +92,7 @@ set scrolloff=3 " minimum indentation from top/bottom of screen to highlighted r
 
 set number " show numbers
 set history=1000
-set nowrap " disable wrapping strings (when they very long)
+set nowrap " disable wrapping strings (when they are very long)
 
 " show spaces and tabs
 set list
@@ -114,6 +117,8 @@ set expandtab " replace tabs to spaces
 set smarttab " only even number of spaces (3 spaces + tab = 4 spaces, 2 spaces + tab = 4 spaces)
 
 set clipboard=unnamedplus " use system clipboard
+
+set diffopt+=vertical
 
 " enable autocomplete
 let g:deoplete#enable_at_startup = 1
@@ -182,6 +187,10 @@ sunmap ge
 
 " switch on -
 let g:switch_mapping = "-"
+let g:switch_custom_definitions =
+    \ [
+    \   ['assert', 'refute']
+    \ ]
 
 " no comment :)
 noremap === :Autoformat<CR>
@@ -228,14 +237,10 @@ let g:EasyGrepOptionPrefix='<leader>vy'
 let g:EasyGrepReplaceAllPerFile=0
 
 " use system languagetool instead of downloading new
-" let g:grammarous#languagetool_cmd = 'languagetool'
+let g:grammarous#languagetool_cmd = 'languagetool'
 
 " for json quotes
 let g:indentLine_concealcursor=""
-
-" set default working directory, don't enable if you want to
-" use alchemist.vim
-" cd ~/projects
 
 " https://github.com/phoenixframework/phoenix/issues/1165
 " Settings for Ale
