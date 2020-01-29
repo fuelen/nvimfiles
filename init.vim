@@ -1,82 +1,77 @@
-"NeoBundle Scripts-----------------------------
-set runtimepath+=/home/fuelen/.config/nvim/bundle/neobundle.vim/
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
 
 " Required:
-call neobundle#begin(expand('/home/fuelen/.config/nvim/bundle'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" colorscheme & syntax highlighting
-NeoBundle 'KeitaNakamura/neodark.vim'
-NeoBundle 'Yggdroot/indentLine'        " prints vertical lines at each indentation level
-NeoBundle 'Raimondi/delimitMate'       " automatic closing of quotes
-NeoBundle 'Valloric/MatchTagAlways'    " highlight XML/HTML tags that enclose your cursor location
-NeoBundle 'lilydjwg/colorizer'         " highlight colors in css files
-NeoBundle 'chemzqm/vim-jsx-improve'
-NeoBundle 'elixir-editors/vim-elixir'
-NeoBundle 'slashmili/alchemist.vim'
-NeoBundle 'slim-template/vim-slim'
-NeoBundle 'terryma/vim-multiple-cursors'
-NeoBundle 'joker1007/vim-ruby-heredoc-syntax'
-NeoBundle 'kchmck/vim-coffee-script'    " I don't need coffee, but plugin above needs this
-NeoBundle 'direnv/direnv.vim'
-NeoBundle 'janko-m/vim-test'
-NeoBundle 'bkad/CamelCaseMotion'
-NeoBundle 'slime-lang/vim-slime-syntax.git' " remove this shit later
-" NeoBundle 'ternjs/tern_for_vim', { 'build': { 'unix': 'npm install tern' }}
-NeoBundle 'rhysd/vim-grammarous'        " Grammar checker based on LanguageTool
-" NeoBundle 'ryanoasis/vim-devicons'
-" NeoBundle 'elzr/vim-json'
-
-" Git
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'airblade/vim-gitgutter'
-
-" File Manager
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'Xuyuanp/nerdtree-git-plugin'
-
-" Utils
-NeoBundle 'bling/vim-airline'      " status-bar
-NeoBundle 'tpope/vim-surround'     " for manipulation with quotes :)
-NeoBundle 'tomtom/tcomment_vim'    " commenter
-NeoBundle 'AndrewRadev/switch.vim' " useful switcher
-NeoBundle 'Chiel92/vim-autoformat' " + install ruby-beautify gem
-NeoBundle 'dkprice/vim-easygrep'   " Fast and Easy Find and Replace Across Multiple Files
-" NeoBundle 'w0rp/ale'               " Syntax checker
-NeoBundle 'ngmy/vim-rubocop'       " code-style checker for ruby
-NeoBundle 'Shougo/deoplete.nvim'   " autocompletion plugin (NeoVim)
-NeoBundle 'Shougo/neco-vim'        "  search in source for deoplete
-NeoBundle 'Shougo/neoinclude.vim'  " search in included files for deoplete
-NeoBundle 'Shougo/neco-syntax'     " search in syntax for deoplete
-NeoBundle 'tpope/vim-endwise'      " autocomplete ruby blocks
-NeoBundle 'junegunn/fzf'           " fuzzy finder
-NeoBundle 'haya14busa/vim-open-googletranslate'
-NeoBundle 'tyru/open-browser.vim'  " dependency for vim-open-googletranslate
-NeoBundle 'chrisbra/csv.vim'       " csv editor and viewer
-NeoBundle 'neovimhaskell/haskell-vim'
-NeoBundle 'elmcast/elm-vim'
-NeoBundle 'reasonml-editor/vim-reason-plus'
-
-NeoBundle 'mhinz/vim-startify' " Startup window
+set runtimepath+=/home/fuelen/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-call neobundle#end()
+if dein#load_state('/home/fuelen/.config/nvim/dein')
+  call dein#begin('/home/fuelen/.config/nvim/dein')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('/home/fuelen/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('wsdjeg/dein-ui.vim')
+  " appearance
+  call dein#add('KeitaNakamura/neodark.vim') " theme
+  call dein#add('vim-airline/vim-airline')   " status bar
+  call dein#add('lilydjwg/colorizer')        " highlight hex and rgb colors
+  " core
+  call dein#add('bkad/CamelCaseMotion')
+  call dein#add('dkprice/vim-easygrep')
+  call dein#add('tomtom/tcomment_vim')
+  call dein#add('direnv/direnv.vim')
+  call dein#add('junegunn/fzf')
+  call dein#add('Yggdroot/indentLine')       " prints vertical lines at each indentation level
+  call dein#add('mhinz/vim-startify')        " start screen
+  call dein#add('wsdjeg/vim-fetch')          " open files in file:line_number format from CLI
+  call dein#add('tpope/vim-surround')        " for manipulation with quotes :)
+  call dein#add('cohama/lexima.vim')         " auto close parentheses
+  call dein#add('Chiel92/vim-autoformat')
+  call dein#add('terryma/vim-multiple-cursors')
+  call dein#add('AndrewRadev/switch.vim')
+  " https://github.com/Shougo/deoplete.nvim/issues/1059
+  call dein#add('Shougo/deoplete.nvim', {'rev': 'a2b0e0fe3e4c6189c9b5b76c9e038510758ac377'})
+  call dein#add('Shougo/neco-syntax')
+
+  " git
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('airblade/vim-gitgutter')
+
+  " file manager
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('Xuyuanp/nerdtree-git-plugin')
+
+  " languages
+  call dein#add('elixir-editors/vim-elixir')
+  call dein#add('HerringtonDarkholme/yats.vim') " typescript syntax
+  call dein#add('idris-hackers/idris-vim')
+  call dein#add('elmcast/elm-vim')
+  call dein#add('neovimhaskell/haskell-vim')
+  call dein#add('gleam-lang/gleam.vim')
+  call dein#add('jparise/vim-graphql')
+  call dein#add('slashmili/alchemist.vim')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
 
 " Required:
 filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
-
-"------------------Settings--------------------
-
 syntax enable
 
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
+
+
+" ---------SETTINGS-----------------------
 colorscheme neodark
 let g:airline_theme='neodark'
 let g:airline_powerline_fonts=1
@@ -98,14 +93,11 @@ set nowrap " disable wrapping strings (when they are very long)
 set list
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 
-" autocmd FileType nerdtree setlocal nolist
-" let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
-" let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
-
 set splitbelow splitright " where new split must be created
 set hidden " allow hidden buffers
 set colorcolumn=110 " width like on github
 set cursorline " highlight whole line under cursor, but makes vim very slow
+" set cursorcolumn
 
 set undofile " undo changes between sessions
 
@@ -120,7 +112,6 @@ set clipboard=unnamedplus " use system clipboard
 
 set diffopt+=vertical
 
-" enable autocomplete
 let g:deoplete#enable_at_startup = 1
 
 "-----------------Mappings----------------------
@@ -130,6 +121,10 @@ let g:mapleader = ","
 " replace default search with search by regex
 nnoremap / /\v
 vnoremap / /\v
+
+" search by selection
+vnoremap /s y/<C-R>"<CR>
+
 set ignorecase
 
 " Turn off arrow keys (this might not be a good idea for beginners, but it is
@@ -154,11 +149,10 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
 " turn search highlight off
 nnoremap <leader><space> :noh<cr>
 
-map <leader>s :Grep 
+map <leader>s :Grep
 " open file browser
 map <leader>p :NERDTreeToggle<cr>
 " set cursor in file browser on current file
@@ -167,10 +161,6 @@ map <C-f> :NERDTreeFind<cr>
 " Easy commenting
 nnoremap // :TComment<CR>
 vnoremap // :TComment<CR>
-
-" open selected text in browser
-vnoremap <leader>t :OpenGoogleTranslate<CR>
-
 " navigate through autocomplete menu (Deoplete)
 inoremap <C-k> <C-Up>
 inoremap <C-j> <C-Down>
@@ -188,9 +178,10 @@ sunmap ge
 " switch on -
 let g:switch_mapping = "-"
 let g:switch_custom_definitions =
-    \ [
-    \   ['assert', 'refute']
-    \ ]
+      \ [
+      \   ['assert', 'refute'],
+      \   ['and', 'or'],
+      \ ]
 
 " no comment :)
 noremap === :Autoformat<CR>
@@ -198,19 +189,11 @@ noremap === :Autoformat<CR>
 " setup preview window for fuzzy finder
 let $FZF_DEFAULT_OPTS='--preview "[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (highlight -O ansi -l {} || coderay {} || rougify {} || cat {}) 2> /dev/null | head -500"'
 " shortkey for fuzzy finder
-nnoremap z :FZF<CR>
+nnoremap <leader>z :FZF<CR>
 
-" set custom config file for RuboCop
-let g:vimrubocop_config = '~/.config/nvim/rubocop.yml'
-
-" add tags highlighting to js
-let g:mta_filetypes = {
-      \ 'html' : 1,
-      \ 'xhtml' : 1,
-      \ 'xml' : 1,
-      \ 'jinja' : 1,
-      \ 'javascript' : 1,
-      \}
+" folding
+set foldmethod=syntax
+set foldlevelstart=99 " start unfolded
 
 let $TERM='xterm'
 
@@ -222,7 +205,7 @@ let g:EasyGrepIgnoreCase=1
 let g:EasyGrepHidden=0
 let g:EasyGrepBinary=0
 let g:EasyGrepFilesToInclude=''
-let g:EasyGrepFilesToExclude='*.swp,*~,*.beam,*webpack_bundle.js,*.worker.js,*.log,_build/,node_modules,erl_crash.dump,*.sql,coverage/,tmp/,.docker/'
+let g:EasyGrepFilesToExclude='*.swp,*~,*.beam,*webpack_bundle.js,*.worker.js,*.log,_build/,node_modules,erl_crash.dump,*.sql,coverage/,tmp/,.docker/,doc/'
 let g:EasyGrepAllOptionsInExplorer=1
 let g:EasyGrepWindow=0
 let g:EasyGrepReplaceWindowMode=0
@@ -235,30 +218,3 @@ let g:EasyGrepFileAssociationsInExplorer=0
 let g:EasyGrepExtraWarnings=0
 let g:EasyGrepOptionPrefix='<leader>vy'
 let g:EasyGrepReplaceAllPerFile=0
-
-" use system languagetool instead of downloading new
-let g:grammarous#languagetool_cmd = 'languagetool'
-
-" for json quotes
-let g:indentLine_concealcursor=""
-
-" https://github.com/phoenixframework/phoenix/issues/1165
-" Settings for Ale
-" let g:ale_lint_on_text_changed = 'never'
-" let g:ale_sign_column_always = 1
-" let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-" let g:ale_javascript_eslint_executable = 'eslint_d'
-" let g:ale_sign_error = '✗'
-" let g:ale_sign_warning = '⚠'
-"
-" augroup AleGroup
-"   autocmd!
-"   autocmd User ALELint call TouchOpenFile()
-" augroup END
-"
-" func! TouchOpenFile()
-"   let g:ale_enabled = 0
-"   sleep 500m
-"   w
-"   let g:ale_enabled = 1
-" endfunc

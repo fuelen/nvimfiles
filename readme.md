@@ -3,9 +3,6 @@
 ## Install on Arch linux
 ### packages
 * neovim
-* neovim-qt-git (AUR)
-* python-neovim
-* python2-neovim
 
 Clone this repository into
 ~/.config/nvim
