@@ -32,9 +32,11 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
   call dein#add('Chiel92/vim-autoformat')
   call dein#add('terryma/vim-multiple-cursors')
   call dein#add('AndrewRadev/switch.vim')
-  " https://github.com/Shougo/deoplete.nvim/issues/1059
-  call dein#add('Shougo/deoplete.nvim', {'rev': 'a2b0e0fe3e4c6189c9b5b76c9e038510758ac377'})
+  call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/neco-syntax')
+  call dein#add('vim-syntastic/syntastic')
+  call dein#add('chrisbra/unicode.vim')
+  call dein#add('easymotion/vim-easymotion')
 
   " git
   call dein#add('tpope/vim-fugitive')
@@ -46,13 +48,16 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
 
   " languages
   call dein#add('elixir-editors/vim-elixir')
+  call dein#add('slashmili/alchemist.vim')
   call dein#add('HerringtonDarkholme/yats.vim') " typescript syntax
   call dein#add('idris-hackers/idris-vim')
   call dein#add('elmcast/elm-vim')
   call dein#add('neovimhaskell/haskell-vim')
   call dein#add('gleam-lang/gleam.vim')
   call dein#add('jparise/vim-graphql')
-  call dein#add('slashmili/alchemist.vim')
+  call dein#add('vmchale/dhall-vim')
+  call dein#add('purescript-contrib/purescript-vim')
+  call dein#add('frigoeu/psc-ide-vim')
 
   " Required:
   call dein#end()
@@ -95,7 +100,7 @@ set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 
 set splitbelow splitright " where new split must be created
 set hidden " allow hidden buffers
-set colorcolumn=110 " width like on github
+set colorcolumn=120
 set cursorline " highlight whole line under cursor, but makes vim very slow
 " set cursorcolumn
 
@@ -152,7 +157,7 @@ nnoremap <C-H> <C-W><C-H>
 " turn search highlight off
 nnoremap <leader><space> :noh<cr>
 
-map <leader>s :Grep
+map <leader>s :Grep 
 " open file browser
 map <leader>p :NERDTreeToggle<cr>
 " set cursor in file browser on current file
@@ -197,6 +202,7 @@ set foldlevelstart=99 " start unfolded
 
 let $TERM='xterm'
 
+" EasyGrep
 let g:EasyGrepMode=0 " all files
 let g:EasyGrepCommand=1 " grep instead of vimgrep
 let g:EasyGrepRecursive=1
@@ -218,3 +224,22 @@ let g:EasyGrepFileAssociationsInExplorer=0
 let g:EasyGrepExtraWarnings=0
 let g:EasyGrepOptionPrefix='<leader>vy'
 let g:EasyGrepReplaceAllPerFile=0
+
+" deoplete
+let g:deoplete#complete_method = "omnifunc"
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.purescript = ['\w*']
+let g:deoplete#omni#input_patterns = {}
+let g:deoplete#omni#input_patterns.purescript = '[.\w]+'
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_elixir_checkers = ['elixir']
+let g:syntastic_enable_elixir_checker = 0
