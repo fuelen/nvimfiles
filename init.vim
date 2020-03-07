@@ -24,6 +24,7 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
   call dein#add('tomtom/tcomment_vim')
   call dein#add('direnv/direnv.vim')
   call dein#add('junegunn/fzf')
+  call dein#add('junegunn/fzf.vim')
   call dein#add('Yggdroot/indentLine')       " prints vertical lines at each indentation level
   call dein#add('mhinz/vim-startify')        " start screen
   call dein#add('wsdjeg/vim-fetch')          " open files in file:line_number format from CLI
@@ -80,6 +81,8 @@ endif
 colorscheme neodark
 let g:airline_theme='neodark'
 let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 1
+
 " use git against backup files
 set nobackup
 set nowritebackup
@@ -127,8 +130,8 @@ let g:mapleader = ","
 nnoremap / /\v
 vnoremap / /\v
 
-" search by selection
-vnoremap /s y/<C-R>"<CR>
+" search and highlight by selection
+vnoremap <leader>h y/<C-R>"<CR>
 
 set ignorecase
 
@@ -157,7 +160,8 @@ nnoremap <C-H> <C-W><C-H>
 " turn search highlight off
 nnoremap <leader><space> :noh<cr>
 
-map <leader>s :Grep 
+map <leader>s :Grep<space>
+
 " open file browser
 map <leader>p :NERDTreeToggle<cr>
 " set cursor in file browser on current file
@@ -188,6 +192,27 @@ let g:switch_custom_definitions =
       \   ['and', 'or'],
       \ ]
 
+let elixir_module_with_function = '\%([A-Z]\+[a-z\dA-Z]\+\.\)*\k\+'
+let elixir_variable = '\k\+'
+" supported: atoms, module attributes and variables, anonymous functions
+let elixir_values = '\%([:@]\{0,1}\k\+\)\|\%\(fn.\+end\)\|\%(&(.\+)\)'
+
+autocmd FileType elixir let b:switch_custom_definitions =
+    \ [
+    \   {
+    \     ('&\(' . elixir_module_with_function . '\)/1'): 'fn arg -> \1(arg) end',
+    \     ('&\(' . elixir_module_with_function . '\)/2'): 'fn arg1, arg2 -> \1(arg1, arg2) end',
+    \     ('&\(' . elixir_module_with_function . '\)/3'): 'fn arg1, arg2, arg3 -> \1(arg1, arg2, arg3) end',
+    \     ('fn \('. elixir_variable .'\) -> \(' . elixir_module_with_function . '\)(\1) end'): '&\2/1',
+    \     ('fn \('. elixir_variable .'\), \('. elixir_variable .'\) -> \(' . elixir_module_with_function . '\)(\1, \2) end'): '&\3/2',
+    \     ('\(' . elixir_module_with_function . '\)(\('. elixir_values .'\),\s*'): '\2 |> \1(',
+    \     ('\(' . elixir_module_with_function . '\)(\('. elixir_values .'\))'): '\2 |> \1()',
+    \     ('\(' . elixir_values . '\)\s*|>\s*\(' . elixir_module_with_function . '\)()'): '\2(\1)',
+    \     ('\(' . elixir_values . '\)\s*|>\s*\(' . elixir_module_with_function . '\)(\('. elixir_values .'\))'): '\2(\1, \3)',
+    \     ('\(' . elixir_values . '\)\s*|>\s*\(' . elixir_module_with_function . '\)(\('. elixir_values .'\),\s*'): '\2(\1, \3, '
+    \   },
+    \ ]
+
 " no comment :)
 noremap === :Autoformat<CR>
 
@@ -195,6 +220,8 @@ noremap === :Autoformat<CR>
 let $FZF_DEFAULT_OPTS='--preview "[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (highlight -O ansi -l {} || coderay {} || rougify {} || cat {}) 2> /dev/null | head -500"'
 " shortkey for fuzzy finder
 nnoremap <leader>z :FZF<CR>
+
+nnoremap <leader>b :Buffers<CR>
 
 " folding
 set foldmethod=syntax
