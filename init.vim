@@ -21,7 +21,7 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
   " core
   call dein#add('bkad/CamelCaseMotion')
   call dein#add('dkprice/vim-easygrep')
-  call dein#add('tomtom/tcomment_vim')
+  call dein#add('preservim/nerdcommenter')
   call dein#add('direnv/direnv.vim')
   call dein#add('junegunn/fzf')
   call dein#add('junegunn/fzf.vim')
@@ -38,6 +38,13 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
   call dein#add('vim-syntastic/syntastic')
   call dein#add('chrisbra/unicode.vim')
   call dein#add('easymotion/vim-easymotion')
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('janko/vim-test')
+  call dein#add('vim-scripts/utl.vim')
+  call dein#add('itchyny/vim-cursorword')
+  call dein#add('itchyny/calendar.vim')
+  call dein#add('jceb/vim-orgmode')
 
   " git
   call dein#add('tpope/vim-fugitive')
@@ -138,25 +145,28 @@ set ignorecase
 " Turn off arrow keys (this might not be a good idea for beginners, but it is
 " the best way to ween yourself of arrow keys on to hjkl)
 " http://yehudakatz.com/2010/07/29/everyone-who-tried-to-convince-me-to-use-vim-was-wrong/
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>"
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
+" nnoremap <Left> :echoe "Use h"<CR>
+" nnoremap <Right> :echoe "Use l"<CR>
+" nnoremap <Up> :echoe "Use k"<CR>
+" nnoremap <Down> :echoe "Use j"<CR>"
+" inoremap <up> <nop>
+" inoremap <down> <nop>
+" inoremap <left> <nop>
+" inoremap <right> <nop>
 
 " Map ESC
 imap jj <ESC>
-" move between splits by tab
-nnoremap <Tab> <C-w>w
+
+nmap <Tab> :bnext<CR>
+nmap <C-Tab> :bprev<CR>
 
 " navigate between splits
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+nnoremap \| :vsplit<CR>
+nnoremap _ :split<CR>
 " turn search highlight off
 nnoremap <leader><space> :noh<cr>
 
@@ -168,12 +178,25 @@ map <leader>p :NERDTreeToggle<cr>
 map <C-f> :NERDTreeFind<cr>
 
 " Easy commenting
-nnoremap // :TComment<CR>
-vnoremap // :TComment<CR>
+map // <plug>NERDCommenterToggle
 " navigate through autocomplete menu (Deoplete)
 inoremap <C-k> <C-Up>
 inoremap <C-j> <C-Down>
 
+" Neosnippet key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-l>     <Plug>(neosnippet_expand_or_jump)
+smap <C-l>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-l>     <Plug>(neosnippet_expand_target)
+
+" use tab to navigate between holes in snippets
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 " CamelCaseMotion
 map <silent> w <Plug>CamelCaseMotion_w
 map <silent> b <Plug>CamelCaseMotion_b
@@ -191,27 +214,6 @@ let g:switch_custom_definitions =
       \   ['assert', 'refute'],
       \   ['and', 'or'],
       \ ]
-
-let elixir_module_with_function = '\%([A-Z]\+[a-z\dA-Z]\+\.\)*\k\+'
-let elixir_variable = '\k\+'
-" supported: atoms, module attributes and variables, anonymous functions
-let elixir_values = '\%([:@]\{0,1}\k\+\)\|\%\(fn.\+end\)\|\%(&(.\+)\)'
-
-autocmd FileType elixir let b:switch_custom_definitions =
-    \ [
-    \   {
-    \     ('&\(' . elixir_module_with_function . '\)/1'): 'fn arg -> \1(arg) end',
-    \     ('&\(' . elixir_module_with_function . '\)/2'): 'fn arg1, arg2 -> \1(arg1, arg2) end',
-    \     ('&\(' . elixir_module_with_function . '\)/3'): 'fn arg1, arg2, arg3 -> \1(arg1, arg2, arg3) end',
-    \     ('fn \('. elixir_variable .'\) -> \(' . elixir_module_with_function . '\)(\1) end'): '&\2/1',
-    \     ('fn \('. elixir_variable .'\), \('. elixir_variable .'\) -> \(' . elixir_module_with_function . '\)(\1, \2) end'): '&\3/2',
-    \     ('\(' . elixir_module_with_function . '\)(\('. elixir_values .'\),\s*'): '\2 |> \1(',
-    \     ('\(' . elixir_module_with_function . '\)(\('. elixir_values .'\))'): '\2 |> \1()',
-    \     ('\(' . elixir_values . '\)\s*|>\s*\(' . elixir_module_with_function . '\)()'): '\2(\1)',
-    \     ('\(' . elixir_values . '\)\s*|>\s*\(' . elixir_module_with_function . '\)(\('. elixir_values .'\))'): '\2(\1, \3)',
-    \     ('\(' . elixir_values . '\)\s*|>\s*\(' . elixir_module_with_function . '\)(\('. elixir_values .'\),\s*'): '\2(\1, \3, '
-    \   },
-    \ ]
 
 " no comment :)
 noremap === :Autoformat<CR>
@@ -270,3 +272,14 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_elixir_checkers = ['elixir']
 let g:syntastic_enable_elixir_checker = 0
+
+" make test commands execute using dispatch.vim
+let test#strategy = "neovim"
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
+
+ "https://github.com/itchyny/vim-cursorword/issues/20
+let g:cursorword_delay = 0
