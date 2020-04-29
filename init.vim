@@ -21,7 +21,7 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
   " core
   call dein#add('bkad/CamelCaseMotion')
   call dein#add('dkprice/vim-easygrep')
-  call dein#add('preservim/nerdcommenter')
+  call dein#add('tomtom/tcomment_vim')
   call dein#add('direnv/direnv.vim')
   call dein#add('junegunn/fzf')
   call dein#add('junegunn/fzf.vim')
@@ -42,7 +42,6 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('janko/vim-test')
   call dein#add('vim-scripts/utl.vim')
-  call dein#add('itchyny/vim-cursorword')
   call dein#add('itchyny/calendar.vim')
   call dein#add('jceb/vim-orgmode')
 
@@ -178,7 +177,9 @@ map <leader>p :NERDTreeToggle<cr>
 map <C-f> :NERDTreeFind<cr>
 
 " Easy commenting
-map // <plug>NERDCommenterToggle
+nnoremap // :TComment<CR>
+vnoremap // :TComment<CR>
+
 " navigate through autocomplete menu (Deoplete)
 inoremap <C-k> <C-Up>
 inoremap <C-j> <C-Down>
@@ -256,10 +257,10 @@ let g:EasyGrepReplaceAllPerFile=0
 
 " deoplete
 let g:deoplete#complete_method = "omnifunc"
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.purescript = ['\w*']
-let g:deoplete#omni#input_patterns = {}
-let g:deoplete#omni#input_patterns.purescript = '[.\w]+'
+"let g:deoplete#omni_patterns = {}
+"let g:deoplete#omni_patterns.purescript = ['\w*']
+"let g:deoplete#omni#input_patterns = {}
+"let g:deoplete#omni#input_patterns.purescript = '[.\w]+'
 
 " syntastic
 set statusline+=%#warningmsg#
@@ -280,6 +281,3 @@ nmap <silent> t<C-f> :TestFile<CR>
 nmap <silent> t<C-s> :TestSuite<CR>
 nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
-
- "https://github.com/itchyny/vim-cursorword/issues/20
-let g:cursorword_delay = 0
