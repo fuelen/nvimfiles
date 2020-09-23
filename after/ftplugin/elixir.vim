@@ -3,6 +3,10 @@ vnoremap <leader>l sIO.inspect(<C-R>", label: "")<left><left>
 nnoremap <leader>i viwsIO.inspect(<C-R>")<Esc>
 nnoremap <leader>l viwsIO.inspect(<C-R>", label: "")<left><left>
 
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 0
+
 let elixir_module_with_function = '\%([A-Z]\+[a-z\dA-Z]\+\.\)*\k\+'
 let elixir_variable = '\k\+'
 " supported: atoms, module attributes and variables, anonymous functions

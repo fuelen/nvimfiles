@@ -17,13 +17,13 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
   " appearance
   call dein#add('KeitaNakamura/neodark.vim') " theme
   call dein#add('vim-airline/vim-airline')   " status bar
-  call dein#add('lilydjwg/colorizer')        " highlight hex and rgb colors
+  call dein#add('rrethy/vim-hexokinase', { 'build': 'make hexokinase' })
+  call dein#add('RRethy/vim-illuminate')
   " core
   call dein#add('bkad/CamelCaseMotion')
   call dein#add('dkprice/vim-easygrep')
   call dein#add('tomtom/tcomment_vim')
   call dein#add('direnv/direnv.vim')
-  call dein#add('junegunn/fzf')
   call dein#add('junegunn/fzf.vim')
   call dein#add('Yggdroot/indentLine')       " prints vertical lines at each indentation level
   call dein#add('mhinz/vim-startify')        " start screen
@@ -38,12 +38,15 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
   call dein#add('vim-syntastic/syntastic')
   call dein#add('chrisbra/unicode.vim')
   call dein#add('easymotion/vim-easymotion')
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
   call dein#add('janko/vim-test')
   call dein#add('vim-scripts/utl.vim')
   call dein#add('itchyny/calendar.vim')
   call dein#add('jceb/vim-orgmode')
+  call dein#add('autozimu/LanguageClient-neovim', {
+        \ 'rev': 'next',
+        \ 'build': 'bash install.sh',
+        \ })
+  call dein#add('kassio/neoterm')
 
   " git
   call dein#add('tpope/vim-fugitive')
@@ -58,7 +61,7 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
   call dein#add('slashmili/alchemist.vim')
   call dein#add('HerringtonDarkholme/yats.vim') " typescript syntax
   call dein#add('idris-hackers/idris-vim')
-  call dein#add('elmcast/elm-vim')
+  call dein#add('Zaptic/elm-vim')
   call dein#add('neovimhaskell/haskell-vim')
   call dein#add('gleam-lang/gleam.vim')
   call dein#add('jparise/vim-graphql')
@@ -110,7 +113,7 @@ set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 set splitbelow splitright " where new split must be created
 set hidden " allow hidden buffers
 set colorcolumn=120
-set cursorline " highlight whole line under cursor, but makes vim very slow
+" set cursorline " highlight whole line under cursor, but makes vim very slow
 " set cursorcolumn
 
 set undofile " undo changes between sessions
@@ -125,6 +128,9 @@ set smarttab " only even number of spaces (3 spaces + tab = 4 spaces, 2 spaces +
 set clipboard=unnamedplus " use system clipboard
 
 set diffopt+=vertical
+
+" reserve a column for language client/gitgutter notifications even if nothing to show
+set signcolumn=yes
 
 let g:deoplete#enable_at_startup = 1
 
@@ -170,6 +176,7 @@ nnoremap _ :split<CR>
 nnoremap <leader><space> :noh<cr>
 
 map <leader>s :Grep<space>
+vmap <leader>s y:Grep<space><C-r>+
 
 " open file browser
 map <leader>p :NERDTreeToggle<cr>
@@ -179,20 +186,12 @@ map <C-f> :NERDTreeFind<cr>
 " Easy commenting
 nnoremap // :TComment<CR>
 vnoremap // :TComment<CR>
+" missing file types
+call tcomment#type#Define('direnv', '# %s' )
 
 " navigate through autocomplete menu (Deoplete)
 inoremap <C-k> <C-Up>
 inoremap <C-j> <C-Down>
-
-" Neosnippet key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-l>     <Plug>(neosnippet_expand_or_jump)
-smap <C-l>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-l>     <Plug>(neosnippet_expand_target)
-
-" use tab to navigate between holes in snippets
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " For conceal markers.
 if has('conceal')
@@ -219,10 +218,11 @@ let g:switch_custom_definitions =
 " no comment :)
 noremap === :Autoformat<CR>
 
-" setup preview window for fuzzy finder
-let $FZF_DEFAULT_OPTS='--preview "[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (highlight -O ansi -l {} || coderay {} || rougify {} || cat {}) 2> /dev/null | head -500"'
 " shortkey for fuzzy finder
-nnoremap <leader>z :FZF<CR>
+nnoremap <leader>z :Files<CR>
+
+let g:fzf_preview_window = 'right:65%'
+let g:fzf_layout = {'window': {'width': 0.9, 'height': 0.7}}
 
 nnoremap <leader>b :Buffers<CR>
 
@@ -275,9 +275,43 @@ let g:syntastic_elixir_checkers = ['elixir']
 let g:syntastic_enable_elixir_checker = 0
 
 " make test commands execute using dispatch.vim
-let test#strategy = "neovim"
+" let test#strategy = "neovim"
+let test#strategy = "neoterm"
 nmap <silent> t<C-n> :TestNearest<CR>
 nmap <silent> t<C-f> :TestFile<CR>
 nmap <silent> t<C-s> :TestSuite<CR>
 nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
+
+" \ 'elixir': ['/home/fuelen/projects/elixir-ls/release/language_server.sh'],
+let g:LanguageClient_serverCommands = {
+\ 'elm': ['elm-language-server'],
+\ }
+
+let g:LanguageClient_rootMarkers = {
+  \ 'elm': ['elm.json'],
+  \ }
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+let g:Hexokinase_virtualText = '◼'
+
+let g:Illuminate_ftblacklist = ['nerdtree']
+
+" https://github.com/terryma/vim-multiple-cursors/issues/235
+func! Multiple_cursors_before()
+  if deoplete#is_enabled()
+    call deoplete#disable()
+    let g:deoplete_is_enable_before_multi_cursors = 1
+  else
+    let g:deoplete_is_enable_before_multi_cursors = 0
+  endif
+endfunc
+func! Multiple_cursors_after()
+  if g:deoplete_is_enable_before_multi_cursors
+    call deoplete#enable()
+  endif
+endfunc
