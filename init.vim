@@ -19,6 +19,7 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
   call dein#add('vim-airline/vim-airline')   " status bar
   call dein#add('rrethy/vim-hexokinase', { 'build': 'make hexokinase' })
   call dein#add('RRethy/vim-illuminate')
+  call dein#add('junegunn/goyo.vim')
   " core
   call dein#add('bkad/CamelCaseMotion')
   call dein#add('dkprice/vim-easygrep')
@@ -31,7 +32,7 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
   call dein#add('tpope/vim-surround')        " for manipulation with quotes :)
   call dein#add('cohama/lexima.vim')         " auto close parentheses
   call dein#add('Chiel92/vim-autoformat')
-  call dein#add('terryma/vim-multiple-cursors')
+  call dein#add('mg979/vim-visual-multi')
   call dein#add('AndrewRadev/switch.vim')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/neco-syntax')
@@ -41,7 +42,8 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
   call dein#add('janko/vim-test')
   call dein#add('vim-scripts/utl.vim')
   call dein#add('itchyny/calendar.vim')
-  call dein#add('jceb/vim-orgmode')
+  call dein#add('jceb/vim-orgmode') " deprecated :(
+  call dein#add('dhruvasagar/vim-table-mode')
   call dein#add('autozimu/LanguageClient-neovim', {
         \ 'rev': 'next',
         \ 'build': 'bash install.sh',
@@ -57,6 +59,7 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
   call dein#add('Xuyuanp/nerdtree-git-plugin')
 
   " languages
+  call dein#add('rhysd/vim-gfm-syntax')
   call dein#add('elixir-editors/vim-elixir')
   call dein#add('slashmili/alchemist.vim')
   call dein#add('HerringtonDarkholme/yats.vim') " typescript syntax
@@ -182,6 +185,8 @@ vmap <leader>s y:Grep<space><C-r>+
 map <leader>p :NERDTreeToggle<cr>
 " set cursor in file browser on current file
 map <C-f> :NERDTreeFind<cr>
+" let NERDTreeMinimalUI = 1
+" let NERDTreeIgnore = ['_build$[[dir]]', '\~$', 'node_modules$[[dir]]']
 
 " Easy commenting
 nnoremap // :TComment<CR>
@@ -295,23 +300,38 @@ let g:LanguageClient_rootMarkers = {
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
 " nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <space> :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 let g:Hexokinase_virtualText = '◼'
 
 let g:Illuminate_ftblacklist = ['nerdtree']
 
-" https://github.com/terryma/vim-multiple-cursors/issues/235
-func! Multiple_cursors_before()
-  if deoplete#is_enabled()
-    call deoplete#disable()
-    let g:deoplete_is_enable_before_multi_cursors = 1
-  else
-    let g:deoplete_is_enable_before_multi_cursors = 0
-  endif
-endfunc
-func! Multiple_cursors_after()
-  if g:deoplete_is_enable_before_multi_cursors
-    call deoplete#enable()
-  endif
-endfunc
+let g:VM_mouse_mappings    = 1
+let g:VM_theme             = 'iceblue'
+
+let g:VM_maps = {}
+let g:VM_maps["Undo"]      = 'u'
+let g:VM_maps["Redo"]      = '<C-r>'
+
+" https://github.com/Chiel92/vim-autoformat/issues/236
+" This is for umbrella applications.
+" Try to find the closest '.formatter.exs' to the file currently being edited.
+" If we find one, then pass that as context to the `mix format` command.
+" Withouth this the `mix format -` has no context for the formatting so and
+" cannot apply local project rules.
+function! g:BuildMixFormatLocalCmd()
+	let l:format_file = findfile('.formatter.exs', '.;')
+	if format_file != '' 
+		return 'mix format --dot-formatter ' . format_file . ' -'
+	else
+		return 'mix format -'
+	endif
+endfunction
+let g:formatdef_mix_format = "g:BuildMixFormatLocalCmd()"
+
+" https://vim.fandom.com/wiki/Modeline_magic
+set modeline
+set modelines=5
+
+let g:markdown_fenced_languages = ['elixir']
