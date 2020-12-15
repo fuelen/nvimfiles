@@ -335,3 +335,4 @@ set modeline
 set modelines=5
 
 let g:markdown_fenced_languages = ['elixir']
+let g:startify_change_to_dir = 0
