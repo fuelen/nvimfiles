@@ -16,10 +16,11 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
   call dein#add('wsdjeg/dein-ui.vim')
   " appearance
   call dein#add('KeitaNakamura/neodark.vim') " theme
+  call dein#add('airblade/vim-current-search-match')
   call dein#add('vim-airline/vim-airline')   " status bar
   call dein#add('rrethy/vim-hexokinase', { 'build': 'make hexokinase' })
   call dein#add('RRethy/vim-illuminate')
-  call dein#add('junegunn/goyo.vim')
+  call dein#add('powerman/vim-plugin-AnsiEsc')
   " core
   call dein#add('bkad/CamelCaseMotion')
   call dein#add('dkprice/vim-easygrep')
@@ -42,13 +43,13 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
   call dein#add('janko/vim-test')
   call dein#add('vim-scripts/utl.vim')
   call dein#add('itchyny/calendar.vim')
-  call dein#add('jceb/vim-orgmode') " deprecated :(
   call dein#add('dhruvasagar/vim-table-mode')
   call dein#add('autozimu/LanguageClient-neovim', {
         \ 'rev': 'next',
         \ 'build': 'bash install.sh',
         \ })
   call dein#add('kassio/neoterm')
+  call dein#add('voldikss/vim-translator')
 
   " git
   call dein#add('tpope/vim-fugitive')
@@ -71,6 +72,7 @@ if dein#load_state('/home/fuelen/.config/nvim/dein')
   call dein#add('vmchale/dhall-vim')
   call dein#add('purescript-contrib/purescript-vim')
   call dein#add('frigoeu/psc-ide-vim')
+  call dein#add('jidn/vim-dbml')
 
   " Required:
   call dein#end()
@@ -227,8 +229,9 @@ noremap === :Autoformat<CR>
 nnoremap <leader>z :Files<CR>
 
 let g:fzf_preview_window = 'right:65%'
-let g:fzf_layout = {'window': {'width': 0.9, 'height': 0.7}}
-
+" let g:fzf_layout = {'window': {'width': 0.9, 'height': 0.7}}
+let g:fzf_layout = {'down': '40%'}
+let $FZF_DEFAULT_OPTS = '--reverse'
 nnoremap <leader>b :Buffers<CR>
 
 " folding
@@ -334,5 +337,9 @@ let g:formatdef_mix_format = "g:BuildMixFormatLocalCmd()"
 set modeline
 set modelines=5
 
-let g:markdown_fenced_languages = ['elixir']
+let g:markdown_fenced_languages = ['elixir', 'sql']
 let g:startify_change_to_dir = 0
+
+let g:translator_target_lang = 'uk'
+nmap <Leader>tr <Plug>TranslateW
+vmap <Leader>tr <Plug>TranslateWV
