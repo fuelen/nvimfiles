@@ -1,3 +1,3 @@
 return function()
-    vim.g.Hexokinase_virtualText = "◼"
+  vim.g.Hexokinase_virtualText = "◼"
 end
