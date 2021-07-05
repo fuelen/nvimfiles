@@ -146,5 +146,7 @@ return require("packer").startup(
       "dkprice/vim-easygrep",
       config = require "plugins.easygrep"
     }
+    -- better design for quick-fix window, it is used in easygrep, vim-fugitive, etc
+    use "kevinhwang91/nvim-bqf"
   end
 )
