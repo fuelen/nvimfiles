@@ -123,7 +123,7 @@ return require("packer").startup(
         -- plugin for git
         use "tpope/vim-fugitive"
 
-        --  collection of common configurations for built-in language server client
+        -- collection of common configurations for built-in language server client
         use {
             "neovim/nvim-lspconfig",
             config = require "plugins.lspconfig"
@@ -147,11 +147,19 @@ return require("packer").startup(
         -- Fancy startup screen
         use "mhinz/vim-startify"
 
+        -- grep, perhaps I'll replace it by telescope. Some day
         use {
             "dkprice/vim-easygrep",
             config = require "plugins.easygrep"
         }
+
         -- better design for quick-fix window, it is used in easygrep, vim-fugitive, etc
         use "kevinhwang91/nvim-bqf"
+
+        -- A helper which shows key-bindings
+        use {
+            "folke/which-key.nvim",
+            config = require "plugins.which-key"
+        }
     end
 )
