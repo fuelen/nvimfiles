@@ -32,10 +32,12 @@ return require("packer").startup(
 
     -- file browser
     use {
-      "scrooloose/nerdtree",
-      config = require "plugins.nerdtree"
+      "kyazdani42/nvim-tree.lua",
+      config = require "plugins.nvim-tree",
+      requires = {
+        "kyazdani42/nvim-web-devicons"
+      }
     }
-    use "Xuyuanp/nerdtree-git-plugin"
 
     use {
       "hrsh7th/nvim-compe",
@@ -70,14 +72,17 @@ return require("packer").startup(
     }
 
     -- a tool for debugging treesitter
-    use {"nvim-treesitter/playground", after = "nvim-treesitter"}
+    use {"nvim-treesitter/playground"}
+
+    -- prints vertical lines at each indentation level
+    use {"Yggdroot/indentLine", config = require "plugins.indent_line"}
 
     -- prints vertical lines at each indentation level. requires treesitter
-    use {
-      "lukas-reineke/indent-blankline.nvim",
-      config = require "plugins.indent-blankline",
-      after = "nvim-treesitter"
-    }
+    -- disabled, because https://github.com/lukas-reineke/indent-blankline.nvim/issues/141
+    -- use {
+    --   "lukas-reineke/indent-blankline.nvim",
+    --   config = require "plugins.indent-blankline"
+    -- }
 
     -- open files in file:line_number format from CLI, useful with `neovim-remote` tool
     use "wsdjeg/vim-fetch"

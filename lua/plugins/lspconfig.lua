@@ -33,6 +33,7 @@ return function()
     buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
     buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   end
+
   lspconfig.elixirls.setup {
     on_attach = on_attach,
     cmd = {"/home/fuelen/projects/elixir-ls/language_server.sh"},
