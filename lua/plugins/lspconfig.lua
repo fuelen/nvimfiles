@@ -8,8 +8,6 @@ return function()
             vim.api.nvim_buf_set_option(bufnr, ...)
         end
 
-        -- Enable completion triggered by <c-x><c-o>
-        buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
         -- Mappings.
         local opts = {noremap = true, silent = true}
@@ -34,11 +32,37 @@ return function()
         buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
     end
 
+    local manipulate_pipes = function(command)
+        return function()
+            local position_params = vim.lsp.util.make_position_params()
+            vim.lsp.buf.execute_command(
+                {
+                    command = "manipulatePipes:" .. command,
+                    arguments = {
+                        command,
+                        position_params.textDocument.uri,
+                        position_params.position.line,
+                        position_params.position.character
+                    }
+                }
+            )
+        end
+    end
+
     lspconfig.elixirls.setup {
         on_attach = on_attach,
         cmd = {"/home/fuelen/projects/elixir-ls/language_server.sh"},
         settings = {
             elixirLS = {dialyzerEnabled = false}
+        },
+        commands = {
+            ToPipe = {manipulate_pipes("toPipe"), "Convert function call to pipe operator"},
+            FromPipe = {manipulate_pipes("fromPipe"), "Convert pipe operator to function call"}
         }
     }
+
+
+   -- TODO: define this mapping in on_attach only for Elixir
+    vim.api.nvim_set_keymap("n", "<space>tp", ":ToPipe<CR>", {noremap = true})
+    vim.api.nvim_set_keymap("n", "<space>fp", ":FromPipe<CR>", {noremap = true})
 end

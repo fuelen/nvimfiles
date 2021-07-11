@@ -90,8 +90,9 @@ vim.api.wildmenu = true
 -- Wildmenu ignores case
 vim.api.wildignorecase = true
 
+vim.opt.fillchars = "vert:▏"
 -- vertical diff
-vim.o.diffopt = "filler,internal,algorithm:histogram,indent-heuristic"
+vim.opt.diffopt = "filler,internal,algorithm:histogram,indent-heuristic"
 
 -- mouse support
 vim.o.mouse = "a"
