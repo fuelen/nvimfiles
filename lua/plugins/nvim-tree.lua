@@ -1,4 +1,4 @@
-_G.nvim_tree_find_file = function()
+_G.NvimTreeFindFilePatched = function()
     local function starts_with(String, Start)
         return string.sub(String, 1, string.len(Start)) == Start
     end
@@ -12,7 +12,17 @@ _G.nvim_tree_find_file = function()
         require("nvim-tree").refresh()
         require("nvim-tree.lib").change_dir(cur_path)
         require("nvim-tree").find_file(true)
-        vim.cmd("cd " .. cwd)
+        vim.cmd("cd " .. cur_path)
+    end
+end
+
+_G.NvimTreeOpenWith = function()
+    local lib = require'nvim-tree.lib'
+    local utils = require'nvim-tree.utils'
+    local node = lib.get_node_at_cursor()
+    if node then
+        local command = vim.fn.input('Open \''.. utils.path_basename(node.absolute_path).. '\' with: ', "xdg-open")
+        vim.fn.jobstart(command.. " '" .. node.absolute_path .. "' 2>/dev/null&", { detach = true })
     end
 end
 
@@ -20,7 +30,7 @@ return function()
     local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
     vim.api.nvim_set_keymap("", "<leader>p", ":NvimTreeToggle<CR>", {noremap = true})
-    vim.api.nvim_set_keymap("", "<C-F>", ":lua _G.nvim_tree_find_file()<CR>", {noremap = true})
+    vim.api.nvim_set_keymap("", "<C-F>", ":lua _G.NvimTreeFindFilePatched()<CR>", {noremap = true})
     vim.g.nvim_tree_special_files = {} -- don't highlight readme files
     vim.g.nvim_tree_hide_dotfiles = 1
     vim.g.nvim_tree_git_hl = 1
@@ -28,7 +38,8 @@ return function()
     vim.g.nvim_tree_indent_markers = 1
 
     vim.g.nvim_tree_bindings = {
-      { key = {"<CR>", "o", "<2-LeftMouse>"}, cb = tree_cb("edit") },
+      { key = "o",                            cb = ":lua NvimTreeOpenWith()<CR>" }, -- custom
+      { key = {"<CR>", "<2-LeftMouse>"},      cb = tree_cb("edit") },
       { key = {"<2-RightMouse>", "<C-]>"},    cb = tree_cb("cd") },
       { key = "|",                            cb = tree_cb("vsplit") }, -- custom
       { key = "_",                            cb = tree_cb("split") }, -- custom
@@ -58,7 +69,7 @@ return function()
       { key = "]c",                           cb = tree_cb("next_git_item") },
       { key = "-",                            cb = tree_cb("dir_up") },
       { key = "q",                            cb = tree_cb("close") },
-      { key = "?",                           cb = tree_cb("toggle_help") } -- custom
+      { key = "?" ,                           cb = tree_cb("toggle_help") } -- custom
     }
     vim.g.nvim_tree_icons = {
         -- default the only icon that is changed

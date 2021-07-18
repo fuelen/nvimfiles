@@ -161,5 +161,10 @@ return require("packer").startup(
             "folke/which-key.nvim",
             config = require "plugins.which-key"
         }
+
+        use {
+          "onsails/lspkind-nvim",
+          config = require "plugins.lspkind"
+        }
     end
 )

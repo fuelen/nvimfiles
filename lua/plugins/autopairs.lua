@@ -8,17 +8,11 @@ return function()
         }
     )
 
-    -- TODO: uncomment when https://github.com/windwp/nvim-autopairs/issues/74 is solved
-    -- local endwise = require("nvim-autopairs.ts-rule").endwise
-    -- npairs.add_rules(require("nvim-autopairs.rules.endwise-lua"))
-    --
-    -- npairs.add_rules(
-    --     {
-    --         -- then$ is a lua regex
-    --         -- end is a match pair
-    --         -- lua is a filetype
-    --         -- if_statement is a treesitter name. set it = nil to skip check with treesitter
-    --         endwise(" do$", "end", "elixir", nil)
-    --     }
-    -- )
+    local endwise = require("nvim-autopairs.ts-rule").endwise
+    npairs.add_rules(
+        {
+            endwise('then$', 'end', 'lua', nil),
+            endwise(" do$", "end", "elixir", nil)
+        }
+    )
 end
