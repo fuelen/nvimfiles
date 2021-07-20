@@ -162,9 +162,16 @@ return require("packer").startup(
             config = require "plugins.which-key"
         }
 
+        -- Show an icon in autocompletion list
         use {
           "onsails/lspkind-nvim",
           config = require "plugins.lspkind"
+        }
+
+        -- Show signature from LSP when apply a function
+        use {
+          "ray-x/lsp_signature.nvim",
+          config = require "plugins.lsp_signature"
         }
     end
 )
