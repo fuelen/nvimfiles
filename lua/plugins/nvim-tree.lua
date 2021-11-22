@@ -1,21 +1,3 @@
-_G.NvimTreeFindFilePatched = function()
-    local function starts_with(String, Start)
-        return string.sub(String, 1, string.len(Start)) == Start
-    end
-
-    local cwd = vim.fn.getcwd()
-    local cur_path = vim.fn.expand("%:p:h")
-
-    if starts_with(cur_path, cwd) then
-        require("nvim-tree").find_file(true)
-    else
-        require("nvim-tree").refresh()
-        require("nvim-tree.lib").change_dir(cur_path)
-        require("nvim-tree").find_file(true)
-        vim.cmd("cd " .. cur_path)
-    end
-end
-
 _G.NvimTreeOpenWith = function()
     local lib = require'nvim-tree.lib'
     local utils = require'nvim-tree.utils'
@@ -27,17 +9,16 @@ _G.NvimTreeOpenWith = function()
 end
 
 return function()
+
     local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
     vim.api.nvim_set_keymap("", "<leader>p", ":NvimTreeToggle<CR>", {noremap = true})
-    vim.api.nvim_set_keymap("", "<C-F>", ":lua _G.NvimTreeFindFilePatched()<CR>", {noremap = true})
+    vim.api.nvim_set_keymap("", "<C-F>", ":NvimTreeFindFile<CR>", {noremap = true})
     vim.g.nvim_tree_special_files = {} -- don't highlight readme files
-    vim.g.nvim_tree_hide_dotfiles = 1
     vim.g.nvim_tree_git_hl = 1
-    vim.g.nvim_tree_disable_default_keybindings = 1
     vim.g.nvim_tree_indent_markers = 1
 
-    vim.g.nvim_tree_bindings = {
+    local nvim_tree_bindings = {
       { key = "o",                            cb = ":lua NvimTreeOpenWith()<CR>" }, -- custom
       { key = {"<CR>", "<2-LeftMouse>"},      cb = tree_cb("edit") },
       { key = {"<2-RightMouse>", "<C-]>"},    cb = tree_cb("cd") },
@@ -100,5 +81,17 @@ return function()
             warning = "",
             error = ""
         }
+    }
+    require'nvim-tree'.setup {
+      view = {
+        auto_resize = true,
+        mappings = {
+          custom_only = true,
+          list = nvim_tree_bindings
+        },
+        filters = {
+          dotfiles = false
+        }
+      }
     }
 end

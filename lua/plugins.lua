@@ -173,5 +173,9 @@ return require("packer").startup(
           "ray-x/lsp_signature.nvim",
           config = require "plugins.lsp_signature"
         }
+
+        use "edwinb/idris2-vim"
+
+        use "dhruvasagar/vim-table-mode"
     end
 )

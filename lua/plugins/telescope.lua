@@ -17,7 +17,7 @@ return function()
     vim.api.nvim_set_keymap(
         "n",
         "<Leader>b",
-        [[<Cmd>Telescope buffers theme=get_ivy<CR>]],
+        [[<Cmd>Telescope buffers theme=get_ivy sort_lastused=true<CR>]],
         {noremap = true, silent = true}
     )
     vim.api.nvim_set_keymap("n", "<Leader>of", [[<Cmd>Telescope oldfiles<CR>]], {noremap = true, silent = true})

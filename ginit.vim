@@ -1,7 +1,5 @@
 " if neovim-qt
-if exists('g:GuiFont')
-  " GuiFont InputMonoNarrow ExLight:h12
-  " GuiFont JetBrainsMonoMedium Nerd Font Mono:14
+if exists(':GuiFont')
   " with ! to suppress warning Font \"Terminus\" reports bad fixed pitch
   " metrics
   GuiFont! Terminus:h14

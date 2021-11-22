@@ -1,5 +1,6 @@
 return function()
     local npairs = require("nvim-autopairs")
+    local Rule = require('nvim-autopairs.rule')
     npairs.setup()
     require("nvim-autopairs.completion.compe").setup(
         {
@@ -12,7 +13,7 @@ return function()
     npairs.add_rules(
         {
             endwise('then$', 'end', 'lua', nil),
-            endwise(" do$", "end", "elixir", nil)
+            Rule('"""', '"""', 'elixir'),
         }
     )
 end
