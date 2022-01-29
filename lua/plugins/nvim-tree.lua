@@ -88,10 +88,10 @@ return function()
         mappings = {
           custom_only = true,
           list = nvim_tree_bindings
-        },
-        filters = {
-          dotfiles = false
         }
+      },
+      filters = {
+        dotfiles = false
       }
     }
 end
