@@ -79,13 +79,6 @@ return require("packer").startup(
         -- prints vertical lines at each indentation level
         use {"Yggdroot/indentLine", config = require "plugins.indent_line"}
 
-        -- prints vertical lines at each indentation level. requires treesitter
-        -- disabled, because https://github.com/lukas-reineke/indent-blankline.nvim/issues/141
-        -- use {
-        --   "lukas-reineke/indent-blankline.nvim",
-        --   config = require "plugins.indent-blankline"
-        -- }
-
         -- open files in file:line_number format from CLI, useful with `neovim-remote` tool
         use "wsdjeg/vim-fetch"
 
