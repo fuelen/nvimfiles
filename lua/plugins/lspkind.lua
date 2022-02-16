@@ -1,20 +1,6 @@
 return function()
   require('lspkind').init({
-    -- enables text annotations
-    --
-    -- default: true
-    with_text = false,
-
-    -- default symbol map
-    -- can be either 'default' or
-    -- 'codicons' for codicon preset (requires vscode-codicons font installed)
-    --
-    -- default: 'default'
-    -- preset = 'codicons',
-
-    -- override preset symbols
-    --
-    -- default: {}
+    mode = 'symbol_text',
     symbol_map = {
       Text = '',
       Method = 'ƒ',

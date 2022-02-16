@@ -83,6 +83,9 @@ return function()
         }
     }
     require'nvim-tree'.setup {
+      git = {
+        ignore = false,
+      },
       view = {
         auto_resize = true,
         mappings = {

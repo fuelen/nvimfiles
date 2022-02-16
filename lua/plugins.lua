@@ -34,6 +34,8 @@ return require("packer").startup(
         use {
             "kyazdani42/nvim-tree.lua",
             config = require "plugins.nvim-tree",
+            -- https://github.com/kyazdani42/nvim-tree.lua/issues/991
+            commit = "3f4ed9b6c2598ab8304186486a05ae7a328b8d49",
             requires = {
                 "kyazdani42/nvim-web-devicons"
             }
@@ -140,6 +142,11 @@ return require("packer").startup(
                 {"nvim-lua/popup.nvim"},
                 {"nvim-lua/plenary.nvim"}
             }
+        }
+        use {
+            "nvim-telescope/telescope-fzf-native.nvim",
+            run = 'make',
+            config = require "plugins.telescope-fzf-native"
         }
         -- Github Flavored Markdown
         use "rhysd/vim-gfm-syntax"
