@@ -49,6 +49,8 @@ return function()
         end
     end
 
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
     lspconfig.elixirls.setup {
         on_attach = on_attach,
         cmd = {"/home/fuelen/projects/elixir-ls/language_server.sh"},
@@ -58,7 +60,8 @@ return function()
         commands = {
             ToPipe = {manipulate_pipes("toPipe"), "Convert function call to pipe operator"},
             FromPipe = {manipulate_pipes("fromPipe"), "Convert pipe operator to function call"}
-        }
+        },
+        capabilities = capabilities
     }
 
 

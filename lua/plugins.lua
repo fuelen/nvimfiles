@@ -41,11 +41,6 @@ return require("packer").startup(
             }
         }
 
-        use {
-            "hrsh7th/nvim-compe",
-            config = require "plugins.compe"
-        }
-
         -- autoclose parentheses
         use {
             "windwp/nvim-autopairs",
@@ -122,6 +117,21 @@ return require("packer").startup(
         use {
             "neovim/nvim-lspconfig",
             config = require "plugins.lspconfig"
+        }
+
+        use {
+            "hrsh7th/nvim-cmp",
+            config = require "plugins.cmp",
+            requires = {
+                "hrsh7th/cmp-nvim-lsp",
+                "hrsh7th/cmp-buffer",
+                "hrsh7th/cmp-path",
+                "hrsh7th/cmp-cmdline",
+                -- cmp-look requires "words" package (arch linux)
+                "octaltree/cmp-look",
+                "SirVer/ultisnips",
+                "quangnguyen30192/cmp-nvim-ultisnips"
+            }
         }
 
         -- can be removed in the future when elixir plugin for treesitter is improved
