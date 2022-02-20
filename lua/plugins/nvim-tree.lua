@@ -13,7 +13,7 @@ return function()
     local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
     vim.api.nvim_set_keymap("", "<leader>p", ":NvimTreeToggle<CR>", {noremap = true})
-    vim.api.nvim_set_keymap("", "<C-F>", ":NvimTreeFindFile<CR>", {noremap = true})
+    vim.api.nvim_set_keymap("", "<Space>ff", ":NvimTreeFindFile<CR>", {noremap = true})
     vim.g.nvim_tree_special_files = {} -- don't highlight readme files
     vim.g.nvim_tree_git_hl = 1
     vim.g.nvim_tree_indent_markers = 1

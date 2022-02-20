@@ -119,6 +119,7 @@ return require("packer").startup(
             config = require "plugins.lspconfig"
         }
 
+        -- autocomplete with plugins
         use {
             "hrsh7th/nvim-cmp",
             config = require "plugins.cmp",
@@ -129,13 +130,11 @@ return require("packer").startup(
                 "hrsh7th/cmp-cmdline",
                 -- cmp-look requires "words" package (arch linux)
                 "octaltree/cmp-look",
+        -- snippets
                 "SirVer/ultisnips",
                 "quangnguyen30192/cmp-nvim-ultisnips"
             }
         }
-
-        -- can be removed in the future when elixir plugin for treesitter is improved
-        use "elixir-editors/vim-elixir"
 
         --  highly extendable fuzzy finder over lists
         use {
@@ -146,6 +145,7 @@ return require("packer").startup(
                 {"nvim-lua/plenary.nvim"}
             }
         }
+        -- better sorter for telescope
         use {
             "nvim-telescope/telescope-fzf-native.nvim",
             run = 'make',
@@ -187,5 +187,10 @@ return require("packer").startup(
         use "edwinb/idris2-vim"
 
         use "dhruvasagar/vim-table-mode"
+
+        use {
+            "karb94/neoscroll.nvim",
+            config = require "plugins.neoscroll"
+        }
     end
 )
