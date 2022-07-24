@@ -1,14 +1,10 @@
 return function()
     lspconfig = require("lspconfig")
+
     local on_attach = function(client, bufnr)
         local function buf_set_keymap(...)
             vim.api.nvim_buf_set_keymap(bufnr, ...)
         end
-        local function buf_set_option(...)
-            vim.api.nvim_buf_set_option(bufnr, ...)
-        end
-
-
         -- Mappings.
         local opts = {noremap = true, silent = true}
 
@@ -30,6 +26,7 @@ return function()
         buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
         buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
         buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+        buf_set_keymap("n", "<leader>dd", "<cmd> lua vim.diagnostic.open_float()<CR>", opts)
     end
 
     local manipulate_pipes = function(command)
@@ -52,10 +49,24 @@ return function()
     local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
     lspconfig.elixirls.setup {
-        on_attach = on_attach,
+        on_attach = function(client, bufnr)
+          on_attach(client, bufnr)
+          vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+            buffer = bufnr,
+            callback = vim.lsp.codelens.refresh,
+          })
+
+          vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>tp", ":ToPipe<CR>", {noremap = true})
+          vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>fp", ":FromPipe<CR>", {noremap = true})
+        end,
         cmd = {"/home/fuelen/projects/elixir-ls/language_server.sh"},
         settings = {
-            elixirLS = {dialyzerEnabled = false}
+            elixirLS = {
+            --     dialyzerEnabled = true,
+            --     dialyzerFormat = "dialyxir_short",
+                suggestSpecs = true,
+                enableTestLenses = true
+            }
         },
         commands = {
             ToPipe = {manipulate_pipes("toPipe"), "Convert function call to pipe operator"},
@@ -63,9 +74,8 @@ return function()
         },
         capabilities = capabilities
     }
-
-
-   -- TODO: define this mapping in on_attach only for Elixir
-    vim.api.nvim_set_keymap("n", "<space>tp", ":ToPipe<CR>", {noremap = true})
-    vim.api.nvim_set_keymap("n", "<space>fp", ":FromPipe<CR>", {noremap = true})
+    lspconfig.tsserver.setup {
+        on_attach = on_attach,
+        capabilities = capabilities
+    }
 end
