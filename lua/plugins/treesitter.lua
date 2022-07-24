@@ -12,7 +12,9 @@ return function()
             "json",
             "lua",
             "html",
-            "yaml"
+            "yaml",
+            "heex",
+            "eex"
         },
         highlight = {
             enable = true,
