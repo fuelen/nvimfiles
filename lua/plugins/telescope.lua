@@ -1,5 +1,4 @@
 return function()
-    vim.api.nvim_set_keymap("n", "<Leader>gs", [[<Cmd> Telescope git_status <CR>]], {noremap = true, silent = true})
     vim.api.nvim_set_keymap("n", "<Leader>cm", [[<Cmd> Telescope git_commits <CR>]], {noremap = true, silent = true})
     vim.api.nvim_set_keymap(
         "n",
@@ -20,5 +19,4 @@ return function()
         [[<Cmd>Telescope buffers theme=get_ivy sort_lastused=true<CR>]],
         {noremap = true, silent = true}
     )
-    vim.api.nvim_set_keymap("n", "<Leader>of", [[<Cmd>Telescope oldfiles<CR>]], {noremap = true, silent = true})
 end
