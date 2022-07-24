@@ -9,4 +9,5 @@ return function()
             endwise('then$', 'end', 'lua', nil),
         }
     )
+    npairs.add_rules(require('nvim-autopairs.rules.endwise-elixir'))
 end
