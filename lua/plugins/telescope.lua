@@ -19,4 +19,19 @@ return function()
         [[<Cmd>Telescope buffers theme=get_ivy sort_lastused=true<CR>]],
         {noremap = true, silent = true}
     )
+
+    -- https://www.reddit.com/r/neovim/comments/qspemc/close_buffers_with_telescope/
+    require('telescope').setup{
+      defaults = {
+        mappings = {
+          n = {
+            ['<c-d>'] = require('telescope.actions').delete_buffer
+          },
+          i = {
+            ["<C-h>"] = "which_key",
+            ['<c-d>'] = require('telescope.actions').delete_buffer
+          }
+        }
+      }
+    }
 end

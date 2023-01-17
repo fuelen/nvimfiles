@@ -1,8 +1,8 @@
 # NeoVim files
 
-## Install on Arch linux
+## Install on Arch Linux
 
-### packages
+### Packages
 
 - neovim
 

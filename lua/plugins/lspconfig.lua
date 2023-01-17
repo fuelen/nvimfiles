@@ -25,7 +25,7 @@ return function()
         buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
         buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
         buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
-        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.format({async = true})<CR>", opts)
         buf_set_keymap("n", "<leader>dd", "<cmd> lua vim.diagnostic.open_float()<CR>", opts)
     end
 
@@ -46,34 +46,35 @@ return function()
         end
     end
 
-    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-    lspconfig.elixirls.setup {
-        on_attach = function(client, bufnr)
-          on_attach(client, bufnr)
-          vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-            buffer = bufnr,
-            callback = vim.lsp.codelens.refresh,
-          })
-
-          vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>tp", ":ToPipe<CR>", {noremap = true})
-          vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>fp", ":FromPipe<CR>", {noremap = true})
-        end,
-        cmd = {"/home/fuelen/projects/elixir-ls/language_server.sh"},
-        settings = {
-            elixirLS = {
-            --     dialyzerEnabled = true,
-            --     dialyzerFormat = "dialyxir_short",
-                suggestSpecs = true,
-                enableTestLenses = true
-            }
-        },
-        commands = {
-            ToPipe = {manipulate_pipes("toPipe"), "Convert function call to pipe operator"},
-            FromPipe = {manipulate_pipes("fromPipe"), "Convert pipe operator to function call"}
-        },
-        capabilities = capabilities
-    }
+    -- commented because it is slow as hell and consumes a lot of CPU
+    -- lspconfig.elixirls.setup {
+    --     on_attach = function(client, bufnr)
+    --       on_attach(client, bufnr)
+    --       vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+    --         buffer = bufnr,
+    --         callback = vim.lsp.codelens.refresh,
+    --       })
+    --
+    --       vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>tp", ":ToPipe<CR>", {noremap = true})
+    --       vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>fp", ":FromPipe<CR>", {noremap = true})
+    --     end,
+    --     cmd = {"/home/fuelen/projects/elixir-ls/language_server.sh"},
+    --     settings = {
+    --         elixirLS = {
+    --             dialyzerEnabled = false,
+    --         --     dialyzerFormat = "dialyxir_short",
+    --             suggestSpecs = false,
+    --             enableTestLenses = false
+    --         }
+    --     },
+    --     commands = {
+    --         ToPipe = {manipulate_pipes("toPipe"), "Convert function call to pipe operator"},
+    --         FromPipe = {manipulate_pipes("fromPipe"), "Convert pipe operator to function call"}
+    --     },
+    --     capabilities = capabilities
+    -- }
     lspconfig.tsserver.setup {
         on_attach = on_attach,
         capabilities = capabilities
