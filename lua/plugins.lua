@@ -174,23 +174,19 @@ return require("packer").startup(
 
         -- Show an icon in autocompletion list
         use {
-          "onsails/lspkind-nvim",
-          config = require "plugins.lspkind"
+            "onsails/lspkind-nvim",
+            config = require "plugins.lspkind"
         }
 
         -- Show signature from LSP when apply a function
         use {
-          "ray-x/lsp_signature.nvim",
-          config = require "plugins.lsp_signature"
+            "ray-x/lsp_signature.nvim",
+            config = require "plugins.lsp_signature"
         }
 
+        -- Idirs 2 support
         use "edwinb/idris2-vim"
 
         use "dhruvasagar/vim-table-mode"
-
-        use {
-            "karb94/neoscroll.nvim",
-            config = require "plugins.neoscroll"
-        }
     end
 )
