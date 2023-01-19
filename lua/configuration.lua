@@ -74,13 +74,18 @@ vim.api.nvim_set_keymap("n", "<C-J>", "<C-W><C-J>", {noremap = true})
 vim.api.nvim_set_keymap("n", "<C-K>", "<C-W><C-K>", {noremap = true})
 vim.api.nvim_set_keymap("n", "<C-L>", "<C-W><C-L>", {noremap = true})
 vim.api.nvim_set_keymap("n", "<C-H>", "<C-W><C-H>", {noremap = true})
+
+-- create vertical split
 vim.api.nvim_set_keymap("n", "|", ":vsplit<CR>", {noremap = true})
+-- create horizontal split
 vim.api.nvim_set_keymap("n", "_", ":split<CR>", {noremap = true})
 
+-- alternative exit from insert mode
 vim.api.nvim_set_keymap("i", "jj", "<ESC>", {noremap = true})
 
 -- turn search off
 vim.api.nvim_set_keymap("n", "<leader><space>", ":noh<CR>", {noremap = true})
+
 -- replace default search with search by regex
 vim.api.nvim_set_keymap("n", "/", "/\\v", {noremap = true})
 vim.api.nvim_set_keymap("v", "/", "/\\v", {noremap = true})
@@ -90,6 +95,8 @@ vim.api.wildmenu = true
 -- Wildmenu ignores case
 vim.api.wildignorecase = true
 
+-- use custom vertical line between splits that is aligned to the left, so it looks nice when splits
+-- have different colors (nvim-tree has custom background)
 vim.opt.fillchars = "vert:▏"
 -- vertical diff
 vim.opt.diffopt = "filler,internal,algorithm:histogram,indent-heuristic"

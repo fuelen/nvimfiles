@@ -11,8 +11,9 @@
 - ripgrep (telescope)
 - fg (telescope)
 - direnv (direnv)
+- ascii-image-converter (image.nvim)
 
-Clone this repository into
+Clone this repository to
 ~/.config/nvim
 
 Run `install.sh` to install Packer.

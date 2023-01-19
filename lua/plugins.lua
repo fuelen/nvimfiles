@@ -188,5 +188,13 @@ return require("packer").startup(
         use "edwinb/idris2-vim"
 
         use "dhruvasagar/vim-table-mode"
+        use {
+          'samodostal/image.nvim',
+          requires = {
+            'nvim-lua/plenary.nvim',
+            'm00qek/baleia.nvim'
+          },
+          config = require "plugins.image"
+        }
     end
 )
