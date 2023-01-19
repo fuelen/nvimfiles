@@ -130,7 +130,7 @@ return require("packer").startup(
                 "hrsh7th/cmp-cmdline",
                 -- cmp-look requires "words" package (arch linux)
                 "octaltree/cmp-look",
-        -- snippets
+                -- snippets
                 "SirVer/ultisnips",
                 "quangnguyen30192/cmp-nvim-ultisnips"
             }
@@ -148,7 +148,7 @@ return require("packer").startup(
         -- better sorter for telescope
         use {
             "nvim-telescope/telescope-fzf-native.nvim",
-            run = 'make',
+            run = "make",
             config = require "plugins.telescope-fzf-native"
         }
         -- Github Flavored Markdown
@@ -188,13 +188,15 @@ return require("packer").startup(
         use "edwinb/idris2-vim"
 
         use "dhruvasagar/vim-table-mode"
+
+        -- images viewer
         use {
-          'samodostal/image.nvim',
-          requires = {
-            'nvim-lua/plenary.nvim',
-            'm00qek/baleia.nvim'
-          },
-          config = require "plugins.image"
+            "samodostal/image.nvim",
+            requires = {
+                "nvim-lua/plenary.nvim",
+                "m00qek/baleia.nvim"
+            },
+            config = require "plugins.image"
         }
     end
 )

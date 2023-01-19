@@ -1,3 +1,3 @@
 return function()
-  -- defined in cmp.lua
+    -- defined in cmp.lua
 end

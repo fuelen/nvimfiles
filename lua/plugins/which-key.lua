@@ -1,3 +1,3 @@
 return function()
-  require("which-key").setup {}
+    require("which-key").setup {}
 end

@@ -12,6 +12,7 @@
 - fg (telescope)
 - direnv (direnv)
 - ascii-image-converter (image.nvim)
+- lua-fmt (for autoformat in order to format this project)
 
 Clone this repository to
 ~/.config/nvim

@@ -46,7 +46,7 @@ return function()
         end
     end
 
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
     -- commented because it is slow as hell and consumes a lot of CPU
     -- lspconfig.elixirls.setup {
