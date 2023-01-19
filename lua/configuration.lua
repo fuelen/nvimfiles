@@ -103,11 +103,3 @@ vim.opt.diffopt = "filler,internal,algorithm:histogram,indent-heuristic"
 
 -- mouse support
 vim.o.mouse = "a"
-
--- Disable virtual_text since it's redundant due to lsp_lines (already removed) plugin.
--- Even if not for lsp_lines, it is possible to view diagnostic error by ,dd
-vim.diagnostic.config(
-    {
-        virtual_text = false
-    }
-)

@@ -198,5 +198,17 @@ return require("packer").startup(
             },
             config = require "plugins.image"
         }
+
+        --
+        use {
+            "nvim-neotest/neotest",
+            requires = {
+                "nvim-lua/plenary.nvim",
+                "nvim-treesitter/nvim-treesitter",
+                "antoinemadec/FixCursorHold.nvim",
+                "jfpedroza/neotest-elixir"
+            },
+            config = require "plugins.neotest"
+        }
     end
 )
