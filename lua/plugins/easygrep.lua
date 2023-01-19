@@ -1,5 +1,5 @@
 return function()
-    vim.api.nvim_set_keymap("", "<leader>s", ":Grep<space>", {})
+    vim.api.nvim_set_keymap("n", "<leader>s", ":Grep<space>", {})
     vim.api.nvim_set_keymap("v", "<leader>s", "y:Grep<space><C-r>+", {})
 
     vim.g.EasyGrepMode = 0 -- all files
