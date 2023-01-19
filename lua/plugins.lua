@@ -187,8 +187,6 @@ return require("packer").startup(
         -- Idirs 2 support
         use "edwinb/idris2-vim"
 
-        use "dhruvasagar/vim-table-mode"
-
         -- images viewer
         use {
             "samodostal/image.nvim",
