@@ -1,4 +1,5 @@
 return function()
+    vim.cmd("let g:neodark#italics = 1")
     -- Set colorscheme
     vim.cmd.colorscheme "neodark"
 

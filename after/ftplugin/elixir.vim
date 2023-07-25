@@ -26,6 +26,7 @@ let b:switch_custom_definitions =
           \     ('\(' . elixir_values . '\)\s*|>\s*\(' . elixir_module_with_function . '\)(\('. elixir_values .'\))'): '\2(\1, \3)',
           \     ('\(' . elixir_values . '\)\s*|>\s*\(' . elixir_module_with_function . '\)(\('. elixir_values .'\),\s*'): '\2(\1, \3, '
           \   },
+          \   g:switch_builtins.ruby_hash_style
           \ ]
 
 

@@ -3,6 +3,8 @@ return function()
 
     ts_config.setup {
         ensure_installed = {
+            "markdown",
+            "markdown_inline",
             "bash",
             "css",
             "erlang",
