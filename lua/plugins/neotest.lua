@@ -19,6 +19,10 @@ return function()
         ':lua require("neotest").run.run(vim.fn.expand("%"))<CR>',
         {noremap = true}
     )
+
+    -- attach to running test
+    vim.api.nvim_set_keymap("n", "<leader>ta", ':lua require("neotest").run.attach()<CR>', {noremap = true})
+
     -- stop nearest test (undo - use u because it is used in summary window as well)
     vim.api.nvim_set_keymap("n", "<leader>tu", ':lua require("neotest").run.stop()<CR>', {noremap = true})
     -- test summary
