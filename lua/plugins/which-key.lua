@@ -19,7 +19,7 @@ return function()
     wk.register({["<leader>tr"] = {name = "Google Translate"}}, {mode = "n"})
     wk.register({["<leader>tr"] = {name = "Google Translate"}}, {mode = "v"})
 
-  -- nvim-tree
+    -- nvim-tree
     wk.register({["<leader>p"] = {name = "File Tree"}}, {mode = "n"})
 
     -- core - mappings from configuration.lua
