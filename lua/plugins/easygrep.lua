@@ -11,7 +11,7 @@ return function()
     vim.g.EasyGrepBinary = 0
     vim.g.EasyGrepFilesToInclude = ""
     vim.g.EasyGrepFilesToExclude =
-        "*.swp,*~,*.beam,*webpack_bundle.js,*.worker.js,*.log,_build/,node_modules,erl_crash.dump,*.sql,coverage/,tmp/,.docker/,doc/,cover/,.elixir_ls,.git"
+        "*.swp,*~,*.beam,*webpack_bundle.js,__generated__,graphql-schema.json,*.chunk.js,*.chunk.js.map,*.worker.js,*.log,_build/,node_modules,erl_crash.dump,*.sql,coverage/,tmp/,.docker/,doc/,cover/,.elixir_ls,.git"
     vim.g.EasyGrepAllOptionsInExplorer = 1
     vim.g.EasyGrepWindow = 0
     vim.g.EasyGrepReplaceWindowMode = 0
