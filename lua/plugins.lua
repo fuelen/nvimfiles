@@ -5,7 +5,7 @@ return require("packer").startup(
 
         -- color Scheme
         use {
-            "KeitaNakamura/neodark.vim",
+            "EdenEast/nightfox.nvim",
             config = require "plugins.colorscheme",
             as = "colorscheme"
         }
@@ -168,7 +168,10 @@ return require("packer").startup(
         }
 
         -- Fancy startup screen
-        use "mhinz/vim-startify"
+        use {
+            "mhinz/vim-startify",
+            config = require "plugins.startify"
+        }
 
         -- grep, perhaps I'll replace it by telescope. Some day
         use {
@@ -227,9 +230,13 @@ return require("packer").startup(
         use {
             "akinsho/git-conflict.nvim",
             tag = "*",
-            config = function()
-                require("git-conflict").setup()
-            end
+            config = require "plugins.git-conflict"
+        }
+
+        use {
+            "nvim-lualine/lualine.nvim",
+            requires = {"nvim-tree/nvim-web-devicons", opt = true},
+            config = require "plugins.lualine"
         }
     end
 )
