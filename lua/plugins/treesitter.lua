@@ -11,6 +11,8 @@ return function()
             "elixir",
             "graphql",
             "javascript",
+            "typescript",
+            "tsx",
             "json",
             "lua",
             "html",
