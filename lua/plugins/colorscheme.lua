@@ -46,6 +46,7 @@ return function()
                 variable = "cyan",
                 const = "red",
                 func = "blue",
+                preproc = "green",
                 keyword = "green",
                 builtin1 = "yellow",
                 builtin2 = "pink",
@@ -83,6 +84,8 @@ return function()
     -- explicitly set green color, as in the theme this group is linked to itself
     -- https://github.com/EdenEast/nightfox.nvim/blob/a408e6bb101066952b81de9c11be367114bd561f/lua/nightfox/group/modules/nvimtree.lua#L30
     vim.api.nvim_set_hl(0, "NvimTreeGitStaged", {fg = palettes.nightfox.green})
+    vim.api.nvim_set_hl(0, "NvimTreeGitNew", {fg = palettes.nightfox.yellow})
+    vim.api.nvim_set_hl(0, "NvimTreeGitDirty", {fg = palettes.nightfox.pink})
 
     -- make IlluminatedWord* the same as CursorLine, so it doesn't blink during writing
     vim.api.nvim_set_hl(0, "IlluminatedWordText", {link = "CursorLine"})
@@ -91,6 +94,10 @@ return function()
 
     -- special highlighting for Elixir atoms
     vim.api.nvim_set_hl(0, "@string.special.symbol.elixir", {link = "Identifier"})
+
+    -- nightfox doesn't display italic as italic for some reason:
+    -- https://github.com/EdenEast/nightfox.nvim/blob/a408e6bb101066952b81de9c11be367114bd561f/lua/nightfox/group/modules/treesitter.lua#L96
+    vim.api.nvim_set_hl(0, "@markup.italic", {italic = true})
 
     -- I got used to more visible separator of splits
     vim.api.nvim_set_hl(0, "WinSeparator", {link = "Comment"})
