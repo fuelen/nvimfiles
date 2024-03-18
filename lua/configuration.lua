@@ -84,11 +84,19 @@ vim.api.nvim_set_keymap("n", "_", ":split<CR>", {noremap = true})
 vim.api.nvim_set_keymap("i", "jj", "<ESC>", {noremap = true})
 
 -- turn search off
-vim.api.nvim_set_keymap("n", "<leader><space>", ":noh<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader><space>", ":noh<CR>", {noremap = true, desc = "Clear search highlighting"})
 
 -- replace default search with search by regex
 vim.api.nvim_set_keymap("n", "/", "/\\v", {noremap = true})
 vim.api.nvim_set_keymap("v", "/", "/\\v", {noremap = true})
+
+-- copy file path to `unnamedplus` clipboard
+vim.api.nvim_set_keymap(
+    "n",
+    "cp",
+    [[:let @+ = expand("%")<CR>]],
+    {noremap = true, desc = "Copy file path to `unnamedplus` clipboard"}
+)
 
 -- command-mode completion
 vim.api.wildmenu = true
