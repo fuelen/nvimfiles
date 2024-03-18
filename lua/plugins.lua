@@ -238,5 +238,11 @@ return require("packer").startup(
             requires = {"nvim-tree/nvim-web-devicons", opt = true},
             config = require "plugins.lualine"
         }
+
+        use {
+            "folke/todo-comments.nvim",
+            requires = "nvim-lua/plenary.nvim",
+            config = require "plugins.todo-comments"
+        }
     end
 )
