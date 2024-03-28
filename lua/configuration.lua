@@ -16,7 +16,7 @@ vim.opt.autoread = true
 vim.opt.title = true
 
 -- minimum indentation from top/bottom of screen to highlighted result on searching
-vim.opt.scrolloff = 3
+vim.opt.scrolloff = 6
 
 -- show numbers
 vim.opt.number = true

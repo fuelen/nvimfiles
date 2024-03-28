@@ -244,5 +244,9 @@ return require("packer").startup(
             requires = "nvim-lua/plenary.nvim",
             config = require "plugins.todo-comments"
         }
+        use {
+            "nvim-treesitter/nvim-treesitter-context",
+            config = require "plugins.treesitter-context"
+        }
     end
 )
