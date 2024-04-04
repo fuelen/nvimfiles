@@ -226,7 +226,11 @@ return require("packer").startup(
             config = require "plugins.neotest"
         }
 
-        use {"sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim"}
+        use {
+            "sindrets/diffview.nvim",
+            requires = "nvim-lua/plenary.nvim",
+            config = require "plugins.diffview"
+        }
 
         use {
             "akinsho/git-conflict.nvim",
