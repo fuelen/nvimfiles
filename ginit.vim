@@ -1,6 +1,6 @@
 " neovim-qt specific options
 if exists(':GuiFont')
-  let s:fontsize = 12
+  let s:fontsize = 11
   let s:font = "DejaVu Sans Mono"
 
   " AdjustFontSize functionality taken from https://stackoverflow.com/a/51424640
