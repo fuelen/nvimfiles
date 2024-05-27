@@ -3,11 +3,6 @@ return function()
     local lspkind = require("lspkind")
     local cmp = require("cmp")
     cmp.setup {
-        snippet = {
-            expand = function(args)
-                vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-            end
-        },
         formatting = {
             format = lspkind.cmp_format(
                 {

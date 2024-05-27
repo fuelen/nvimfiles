@@ -144,10 +144,7 @@ return require("packer").startup(
                 "hrsh7th/cmp-path",
                 "hrsh7th/cmp-cmdline",
                 -- cmp-look requires "words" package (arch linux)
-                "octaltree/cmp-look",
-                -- snippets
-                "SirVer/ultisnips",
-                "quangnguyen30192/cmp-nvim-ultisnips"
+                "octaltree/cmp-look"
             }
         }
 
