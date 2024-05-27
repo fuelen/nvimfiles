@@ -18,6 +18,11 @@ vim.opt.title = true
 -- minimum indentation from top/bottom of screen to highlighted result on searching
 vim.opt.scrolloff = 6
 
+-- explicitly set it to "rg --vimgrep", otherwise "rg --vimgrep -uu" is used (don't know what exactly sets this).
+-- The -uu option is used to include all files in the search, even hidden and ignored files.
+-- Ignored files are set by configuration to EasyGrep.
+vim.opt.grepprg = "rg --vimgrep"
+
 -- show numbers
 vim.opt.number = true
 
