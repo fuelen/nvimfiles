@@ -120,21 +120,6 @@ return require("packer").startup(
         -- autocomplete with plugins
         use {
             "hrsh7th/nvim-cmp",
-            -- https://github.com/hrsh7th/nvim-cmp/commit/a0225043ab823fcad8d0d802e276d9838fb48c30
-            -- the commit above produces errors like:
-            -- Error executing luv callback:
-            -- ...nvim/site/pack/packer/start/nvim-cmp/lua/cmp/context.lua:46: E5560: nvim_buf_get_option must not be called in a lua loop callback
-            -- stack traceback:
-            -- 	[C]: in function 'nvim_buf_get_option'
-            -- 	...nvim/site/pack/packer/start/nvim-cmp/lua/cmp/context.lua:46: in function 'new'
-            -- 	...re/nvim/site/pack/packer/start/nvim-cmp/lua/cmp/core.lua:278: in function 'callback'
-            -- 	.../nvim/site/pack/packer/start/nvim-cmp/lua/cmp/source.lua:369: in function 'callback'
-            -- 	.../site/pack/packer/start/nvim-cmp/lua/cmp/utils/async.lua:131: in function 'callback'
-            -- 	...im/site/pack/packer/start/cmp-look/lua/cmp_look/init.lua:184: in function <...im/site/pack/packer/start/cmp-look/lua/cmp_look/init.lua:174>
-            --
-            -- So, we rollback just to random commit in the past to have working autocomplete.
-
-            commit = "bd168a2f86f01f2a348e5f4ac2980943737ff459",
             config = require "plugins.cmp",
             requires = {
                 "hrsh7th/cmp-nvim-lsp",
