@@ -246,5 +246,6 @@ return require("packer").startup(
             "nvim-treesitter/nvim-treesitter-context",
             config = require "plugins.treesitter-context"
         }
+        use "nanotee/sqls.nvim"
     end
 )

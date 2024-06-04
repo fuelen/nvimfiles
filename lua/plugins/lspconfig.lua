@@ -93,4 +93,40 @@ return function()
             }
         }
     }
+    local function all_env_vars_set(env_variables)
+        for _, varName in ipairs(env_variables) do
+            if not os.getenv(varName) then
+                return false
+            end
+        end
+        return true
+    end
+
+    if all_env_vars_set({"DATABASE_HOST", "DATABASE_PORT", "DATABASE_USERNAME", "DATABASE_PASSWORD", "DATABASE_NAME"}) then
+        lspconfig.sqls.setup {
+            on_attach = function(client, bufnr)
+                require("sqls").on_attach(client, bufnr) -- require sqls.nvim
+                on_attach(client, bufnr)
+            end,
+            settings = {
+                sqls = {
+                    connections = {
+                        {
+                            driver = "postgresql",
+                            dataSourceName = "host=" ..
+                                os.getenv("DATABASE_HOST") ..
+                                    " port=" ..
+                                        os.getenv("DATABASE_PORT") ..
+                                            " user=" ..
+                                                os.getenv("DATABASE_USERNAME") ..
+                                                    " password=" ..
+                                                        os.getenv("DATABASE_PASSWORD") ..
+                                                            " dbname=" ..
+                                                                os.getenv("DATABASE_NAME") .. " sslmode=disable"
+                        }
+                    }
+                }
+            }
+        }
+    end
 end
