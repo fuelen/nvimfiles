@@ -68,8 +68,6 @@ return require("packer").startup(
             run = ":TSUpdate"
         }
 
-        -- a tool for debugging treesitter
-        use {"nvim-treesitter/playground"}
 
         -- prints vertical lines at each indentation level
         use {"lukas-reineke/indent-blankline.nvim", config = require "plugins.indent-blankline"}
