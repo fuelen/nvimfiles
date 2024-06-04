@@ -79,4 +79,18 @@ return function()
         on_attach = on_attach,
         capabilities = capabilities
     }
+
+    lspconfig.nextls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        cmd = {"/home/artur/projects/next-ls/burrito_out/next_ls_linux_amd64", "--stdio"},
+        init_options = {
+            extensions = {
+                credo = {enable = true}
+            },
+            experimental = {
+                completions = {enable = true}
+            }
+        }
+    }
 end
