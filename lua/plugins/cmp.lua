@@ -3,6 +3,11 @@ return function()
     local lspkind = require("lspkind")
     local cmp = require("cmp")
     cmp.setup {
+        snippet = {
+            expand = function(args)
+                require("luasnip").lsp_expand(args.body)
+            end
+        },
         formatting = {
             format = lspkind.cmp_format(
                 {
@@ -27,6 +32,7 @@ return function()
         },
         sources = {
             {name = "nvim_lsp"},
+            {name = "luasnip"},
             {
                 name = "buffer",
                 -- Visible buffers

@@ -117,6 +117,17 @@ return require("packer").startup(
             config = require "plugins.lspconfig"
         }
 
+        -- snippets for nvim-cmp
+        use {
+            "L3MON4D3/LuaSnip",
+            config = require "plugins.luasnip",
+            tag = "v2.3.0",
+            run = "make install_jsregexp",
+            requires = {
+                "rafamadriz/friendly-snippets"
+            }
+        }
+
         -- autocomplete with plugins
         use {
             "hrsh7th/nvim-cmp",
@@ -126,6 +137,7 @@ return require("packer").startup(
                 "hrsh7th/cmp-buffer",
                 "hrsh7th/cmp-path",
                 "hrsh7th/cmp-cmdline",
+                "saadparwaiz1/cmp_luasnip",
                 -- cmp-look requires "words" package (arch linux)
                 "octaltree/cmp-look"
             }
