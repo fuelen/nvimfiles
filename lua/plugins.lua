@@ -137,7 +137,8 @@ return require("packer").startup(
             config = require "plugins.telescope",
             requires = {
                 {"nvim-lua/popup.nvim"},
-                {"nvim-lua/plenary.nvim"}
+                {"nvim-lua/plenary.nvim"},
+                {"nvim-telescope/telescope-ui-select.nvim"}
             }
         }
         -- better sorter for telescope
