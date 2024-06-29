@@ -34,12 +34,12 @@ return function()
             local position_params = vim.lsp.util.make_position_params()
             vim.lsp.buf.execute_command(
                 {
-                    command = "manipulatePipes:" .. command,
+                    command = command,
                     arguments = {
-                        command,
-                        position_params.textDocument.uri,
-                        position_params.position.line,
-                        position_params.position.character
+                        {
+                            uri = position_params.textDocument.uri,
+                            position = position_params.position
+                        }
                     }
                 }
             )
@@ -48,33 +48,6 @@ return function()
 
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-    -- commented because it is slow as hell and consumes a lot of CPU
-    -- lspconfig.elixirls.setup {
-    --     on_attach = function(client, bufnr)
-    --       on_attach(client, bufnr)
-    --       vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-    --         buffer = bufnr,
-    --         callback = vim.lsp.codelens.refresh,
-    --       })
-    --
-    --       vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>tp", ":ToPipe<CR>", {noremap = true})
-    --       vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>fp", ":FromPipe<CR>", {noremap = true})
-    --     end,
-    --     cmd = {"/home/fuelen/projects/elixir-ls/language_server.sh"},
-    --     settings = {
-    --         elixirLS = {
-    --             dialyzerEnabled = false,
-    --         --     dialyzerFormat = "dialyxir_short",
-    --             suggestSpecs = false,
-    --             enableTestLenses = false
-    --         }
-    --     },
-    --     commands = {
-    --         ToPipe = {manipulate_pipes("toPipe"), "Convert function call to pipe operator"},
-    --         FromPipe = {manipulate_pipes("fromPipe"), "Convert pipe operator to function call"}
-    --     },
-    --     capabilities = capabilities
-    -- }
     lspconfig.tsserver.setup {
         on_attach = on_attach,
         capabilities = capabilities
@@ -100,6 +73,10 @@ return function()
         on_attach = on_attach,
         capabilities = capabilities,
         cmd = {"/home/artur/projects/next-ls/burrito_out/next_ls_linux_amd64", "--stdio"},
+        commands = {
+            ToPipe = {manipulate_pipes("to-pipe"), "Convert function call to pipe operator"},
+            FromPipe = {manipulate_pipes("from-pipe"), "Convert pipe operator to function call"}
+        },
         init_options = {
             extensions = {
                 credo = {enable = true}
