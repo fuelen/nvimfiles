@@ -13,6 +13,7 @@
 - direnv (direnv)
 - ascii-image-converter (image.nvim)
 - lua-fmt (for autoformat in order to format this project)
+- typos + typos-lsp-bin
 
 Clone this repository to
 ~/.config/nvim
