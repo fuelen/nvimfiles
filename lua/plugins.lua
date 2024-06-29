@@ -254,5 +254,11 @@ return require("packer").startup(
             end
         }
         use "nanotee/sqls.nvim"
+
+        -- notifiers and LSP progress messages
+        use {
+            "j-hui/fidget.nvim",
+            config = require "plugins.fidget"
+        }
     end
 )
