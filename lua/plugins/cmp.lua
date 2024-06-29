@@ -19,6 +19,7 @@ return function()
             format = lspkind.cmp_format(
                 {
                     mode = "symbol", -- show only symbol annotations
+                    symbol_map = {Copilot = ""},
                     maxwidth = 50 -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
                 }
             )
@@ -38,6 +39,7 @@ return function()
             ["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item(), {"i", "c"})
         },
         sources = {
+            {name = "copilot"},
             {name = "nvim_lsp"},
             {name = "luasnip"},
             {

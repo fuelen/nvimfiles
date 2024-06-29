@@ -266,5 +266,17 @@ return require("packer").startup(
             "luckasRanarison/clear-action.nvim",
             config = require "plugins.clear-actions"
         }
+
+        use {
+            "zbirenbaum/copilot.lua",
+            cmd = "Copilot",
+            event = "InsertEnter",
+            config = require "plugins.copilot"
+        }
+        use {
+            "zbirenbaum/copilot-cmp",
+            after = {"copilot.lua"},
+            config = require "plugins.copilot_cmp"
+        }
     end
 )

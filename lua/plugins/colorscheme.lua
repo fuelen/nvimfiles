@@ -101,4 +101,6 @@ return function()
 
     -- I got used to more visible separator of splits
     vim.api.nvim_set_hl(0, "WinSeparator", {link = "Comment"})
+
+    vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg = palettes.nightfox.green})
 end
