@@ -246,6 +246,13 @@ return require("packer").startup(
             "nvim-treesitter/nvim-treesitter-context",
             config = require "plugins.treesitter-context"
         }
+        -- find and replace plugin
+        use {
+            "MagicDuck/grug-far.nvim",
+            config = function()
+                require("grug-far").setup({})
+            end
+        }
         use "nanotee/sqls.nvim"
     end
 )
