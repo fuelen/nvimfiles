@@ -116,3 +116,7 @@ vim.opt.diffopt = "filler,internal,algorithm:histogram,indent-heuristic"
 
 -- mouse support
 vim.o.mouse = "a"
+
+-- Disable F12, because guake uses it and after recent KDE update, pressing F12 in neovim does both:
+-- opens guake and prints <F12> in neovim.
+vim.api.nvim_set_keymap("i", "<F12>", "<nop>", { noremap = true })
