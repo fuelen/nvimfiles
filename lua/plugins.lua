@@ -47,11 +47,6 @@ return require("packer").startup(
             config = require "plugins.autopairs"
         }
 
-        use {
-            "vim-autoformat/vim-autoformat",
-            config = require "plugins.autoformat"
-        }
-
         -- language-agnostic comment/uncomment functionality
         use {
             "tomtom/tcomment_vim",
@@ -277,6 +272,12 @@ return require("packer").startup(
             "zbirenbaum/copilot-cmp",
             after = {"copilot.lua"},
             config = require "plugins.copilot_cmp"
+        }
+
+        -- format code, doesn't require language server
+        use {
+            "stevearc/conform.nvim",
+            config = require "plugins.conform"
         }
     end
 )

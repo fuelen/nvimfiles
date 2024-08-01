@@ -12,7 +12,7 @@
 - fg (telescope)
 - direnv (direnv)
 - ascii-image-converter (image.nvim)
-- lua-fmt (for autoformat in order to format this project)
+- stylua (for autoformat in order to format this project)
 - typos + typos-lsp-bin
 - jedi-language-server (for python)
 

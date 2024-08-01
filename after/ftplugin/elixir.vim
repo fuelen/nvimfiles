@@ -3,10 +3,6 @@ vnoremap <leader>l sIO.inspect(<C-R>", label: "")<left><left>
 nnoremap <leader>i viwsIO.inspect(<C-R>")<Esc>
 nnoremap <leader>l viwsIO.inspect(<C-R>", label: "")<left><left>
 
-let g:autoformat_autoindent = 0
-let g:autoformat_retab = 0
-let g:autoformat_remove_trailing_spaces = 0
-
 let elixir_module_with_function = '\%([A-Z]\+[a-z\dA-Z]\+\.\)*\k\+'
 let elixir_variable = '\k\+'
 " supported: atoms, module attributes and variables, anonymous functions
@@ -28,20 +24,3 @@ let b:switch_custom_definitions =
           \   },
           \   g:switch_builtins.ruby_hash_style
           \ ]
-
-
-" https://github.com/Chiel92/vim-autoformat/issues/236
-" This is for umbrella applications.
-" Try to find the closest '.formatter.exs' to the file currently being edited.
-" If we find one, then pass that as context to the `mix format` command.
-" Withouth this the `mix format -` has no context for the formatting so and
-" cannot apply local project rules.
-function! g:BuildMixFormatLocalCmd()
-  let l:format_file = findfile('.formatter.exs', '.;')
-  if format_file != ''
-    return 'mix format --dot-formatter ' . format_file . ' -'
-  else
-    return 'mix format -'
-  endif
-endfunction
-let g:formatdef_mix_format = "g:BuildMixFormatLocalCmd()"
