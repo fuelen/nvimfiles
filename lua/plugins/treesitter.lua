@@ -1,7 +1,7 @@
 return function()
     local ts_config = require("nvim-treesitter.configs")
 
-    ts_config.setup {
+    ts_config.setup({
         ensure_installed = {
             "markdown",
             "markdown_inline",
@@ -18,16 +18,16 @@ return function()
             "html",
             "yaml",
             "heex",
-            "eex"
+            "eex",
         },
         highlight = {
             enable = true,
-            use_languagetree = true
+            use_languagetree = true,
         },
         indent = {
-            enable = true
-        }
-    }
+            enable = true,
+        },
+    })
 
     -- I couldn't make folding work, so disabling for now
     -- vim.opt.foldmethod = "expr"

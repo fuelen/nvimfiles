@@ -1,4 +1,4 @@
 return function()
-  vim.g.lightline = { colorscheme = "nightfox" }
-  require('lualine').setup()
+    vim.g.lightline = { colorscheme = "nightfox" }
+    require("lualine").setup()
 end

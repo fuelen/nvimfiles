@@ -12,5 +12,5 @@ return function()
         end
     end
 
-    vim.api.nvim_set_keymap("n", "<leader>dv", "<cmd>lua diffview_toggle()<CR>", {desc = "Toggle diffview"})
+    vim.api.nvim_set_keymap("n", "<leader>dv", "<cmd>lua diffview_toggle()<CR>", { desc = "Toggle diffview" })
 end

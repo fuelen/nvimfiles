@@ -1,6 +1,6 @@
 return function()
-    vim.api.nvim_set_keymap("n", "<leader>s", ":Grep<space>", {desc = "Grep"})
-    vim.api.nvim_set_keymap("v", "<leader>s", "y:Grep<space><C-r>+", {desc = "Grep selected text"})
+    vim.api.nvim_set_keymap("n", "<leader>s", ":Grep<space>", { desc = "Grep" })
+    vim.api.nvim_set_keymap("v", "<leader>s", "y:Grep<space><C-r>+", { desc = "Grep selected text" })
 
     vim.g.EasyGrepMode = 0 -- all files
     vim.g.EasyGrepCommand = 1 -- grep instead of vimgrep

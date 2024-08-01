@@ -18,13 +18,13 @@
 -- end
 
 return function()
-    local hooks = require "ibl.hooks"
+    local hooks = require("ibl.hooks")
     hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
 
-    require("ibl").setup {
+    require("ibl").setup({
         enabled = true,
-        indent = {char = "┊"},
-        scope = {enabled = false},
+        indent = { char = "┊" },
+        scope = { enabled = false },
         exclude = {
             filetypes = {
                 "lspinfo",
@@ -37,8 +37,8 @@ return function()
                 "TelescopeResults",
                 "",
                 -- custom
-                "startify"
-            }
-        }
-    }
+                "startify",
+            },
+        },
+    })
 end

@@ -34,8 +34,8 @@ return function()
             --Popup bg (will be overriden by Pmenu hl instructions), visual selection bg
             sel0 = "#374B57",
             --Popup sel bg, search bg
-            sel1 = "#475C69"
-        }
+            sel1 = "#475C69",
+        },
     }
 
     local specs = {
@@ -51,56 +51,54 @@ return function()
                 builtin1 = "yellow",
                 builtin2 = "pink",
                 ident = "cyan",
-                string = "#E18254"
-            }
-        }
+                string = "#E18254",
+            },
+        },
     }
-    local options = {styles = {comments = "italic"}}
+    local options = { styles = { comments = "italic" } }
 
-    require("nightfox").setup(
-        {
-            options = options,
-            palettes = palettes,
-            specs = specs
-        }
-    )
+    require("nightfox").setup({
+        options = options,
+        palettes = palettes,
+        specs = specs,
+    })
 
-    vim.cmd.colorscheme "nightfox"
+    vim.cmd.colorscheme("nightfox")
     -- set background for GitBlameVirtualText the same as background for CursorLine, as git blame virtual text
     -- is visible only on hover which is always CursorLine.
     vim.api.nvim_set_hl(
         0,
         "GitBlameVirtualText",
-        {bg = palettes.nightfox.bg3, fg = palettes.nightfox.comment, italic = true}
+        { bg = palettes.nightfox.bg3, fg = palettes.nightfox.comment, italic = true }
     )
-    vim.api.nvim_set_hl(0, "Search", {fg = palettes.nightfox.orange, bg = palettes.nightfox.bg4, bold = true})
+    vim.api.nvim_set_hl(0, "Search", { fg = palettes.nightfox.orange, bg = palettes.nightfox.bg4, bold = true })
 
     -- highlight group that is used by vim-current-search-match plugin by default
-    vim.api.nvim_set_hl(0, "PmenuSel", {fg = palettes.nightfox.bg2, bg = palettes.nightfox.green})
+    vim.api.nvim_set_hl(0, "PmenuSel", { fg = palettes.nightfox.bg2, bg = palettes.nightfox.green })
 
     -- override, as sel0 that is used for selection as well, is too light for autocomplete background
-    vim.api.nvim_set_hl(0, "Pmenu", {bg = palettes.nightfox.bg3})
+    vim.api.nvim_set_hl(0, "Pmenu", { bg = palettes.nightfox.bg3 })
 
     -- explicitly set green color, as in the theme this group is linked to itself
     -- https://github.com/EdenEast/nightfox.nvim/blob/a408e6bb101066952b81de9c11be367114bd561f/lua/nightfox/group/modules/nvimtree.lua#L30
-    vim.api.nvim_set_hl(0, "NvimTreeGitStaged", {fg = palettes.nightfox.green})
-    vim.api.nvim_set_hl(0, "NvimTreeGitNew", {fg = palettes.nightfox.yellow})
-    vim.api.nvim_set_hl(0, "NvimTreeGitDirty", {fg = palettes.nightfox.pink})
+    vim.api.nvim_set_hl(0, "NvimTreeGitStaged", { fg = palettes.nightfox.green })
+    vim.api.nvim_set_hl(0, "NvimTreeGitNew", { fg = palettes.nightfox.yellow })
+    vim.api.nvim_set_hl(0, "NvimTreeGitDirty", { fg = palettes.nightfox.pink })
 
     -- make IlluminatedWord* the same as CursorLine, so it doesn't blink during writing
-    vim.api.nvim_set_hl(0, "IlluminatedWordText", {link = "CursorLine"})
-    vim.api.nvim_set_hl(0, "IlluminatedWordRead", {link = "CursorLine"})
-    vim.api.nvim_set_hl(0, "IlluminatedWordWrite", {link = "CursorLine"})
+    vim.api.nvim_set_hl(0, "IlluminatedWordText", { link = "CursorLine" })
+    vim.api.nvim_set_hl(0, "IlluminatedWordRead", { link = "CursorLine" })
+    vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { link = "CursorLine" })
 
     -- special highlighting for Elixir atoms
-    vim.api.nvim_set_hl(0, "@string.special.symbol.elixir", {link = "Identifier"})
+    vim.api.nvim_set_hl(0, "@string.special.symbol.elixir", { link = "Identifier" })
 
     -- nightfox doesn't display italic as italic for some reason:
     -- https://github.com/EdenEast/nightfox.nvim/blob/a408e6bb101066952b81de9c11be367114bd561f/lua/nightfox/group/modules/treesitter.lua#L96
-    vim.api.nvim_set_hl(0, "@markup.italic", {italic = true})
+    vim.api.nvim_set_hl(0, "@markup.italic", { italic = true })
 
     -- I got used to more visible separator of splits
-    vim.api.nvim_set_hl(0, "WinSeparator", {link = "Comment"})
+    vim.api.nvim_set_hl(0, "WinSeparator", { link = "Comment" })
 
-    vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {fg = palettes.nightfox.green})
+    vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = palettes.nightfox.green })
 end
